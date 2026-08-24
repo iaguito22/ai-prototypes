@@ -13,6 +13,12 @@ El dado recuerda las últimas tiradas y no las repite, así que no te sale siemp
 mismo. La skill obliga después a montar una página que compare los cuatro a la vez
 y a mirarla antes de entregar.
 
+![Cuatro prototipos de la misma carta de sushi](docs/comparativa.png)
+
+*Una tirada real (`--semilla demo`): `lujo` + `documental`, `producto` + `fila`,
+`industrial` + `bento`, `suizo` + `dock`. Mismo contenido en los cuatro, misma comanda
+de 33,30 €, y cuatro páginas que no se parecen en nada.*
+
 ## Instalar
 
 **Antigravity CLI**
