@@ -17,11 +17,11 @@ y a mirarla antes de entregar.
 
 **Antigravity CLI**
 
-    git clone https://github.com/<tu-usuario>/prototipos ~/.gemini/config/skills/prototipos
+    git clone https://github.com/iaguito22/prototipos ~/.gemini/config/skills/prototipos
 
 **Claude Code**
 
-    git clone https://github.com/<tu-usuario>/prototipos ~/.claude/skills/prototipos
+    git clone https://github.com/iaguito22/prototipos ~/.claude/skills/prototipos
 
 Necesita `python3` para el dado. Nada más.
 
@@ -42,7 +42,7 @@ Banderas del dado (las usa el modelo, pero puedes lanzarlo a mano):
 ## Ver el resultado
 
 El último paso pide **mirar** la comparativa antes de entregarla. Si tienes
-[`agy-ver`](https://github.com/<tu-usuario>/porton-verificacion) vale `agy-ver abrir
+[`agy-ver`](https://github.com/iaguito22/porton-verificacion) vale `agy-ver abrir
 comparar.html`; si no, sirve cualquier forma de ver la página de verdad.
 
 ## Licencia
