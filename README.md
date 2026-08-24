@@ -39,7 +39,13 @@ otra.*
 
     git clone https://github.com/iaguito22/ai-prototypes ~/.claude/skills/prototypes
 
-Necesita `python3` para el dado. Nada más.
+**Windows** (PowerShell) — la carpeta es la misma, solo cambia la ruta:
+
+    git clone https://github.com/iaguito22/ai-prototypes $env:USERPROFILE\.gemini\config\skills\prototypes
+    git clone https://github.com/iaguito22/ai-prototypes $env:USERPROFILE\.claude\skills\prototypes
+
+Necesita Python para el dado, y nada más. En Windows el intérprete se llama `python`
+(o `py -3`), no `python3`.
 
 ## Usar
 
@@ -51,6 +57,7 @@ arrancas un diseño sin dirección estética decidida.
 Banderas del dado (las usa el modelo, pero puedes lanzarlo a mano):
 
     python3 dado.py "tienda de auriculares"   detecta el sector y pondera la tirada
+                                              (en Windows: python dado.py "...")
     python3 dado.py --listar-objetivos        lista los 12 arquetipos de negocio
     python3 dado.py --objetivo saas_b2b       fuerza un sector en vez de detectarlo
     python3 dado.py --aleatorio               azar puro, sin ponderar por sector

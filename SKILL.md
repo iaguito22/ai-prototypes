@@ -18,6 +18,7 @@ entrenamiento. Aqui **la direccion no la eliges tu**.
 ```
 python3 ~/.gemini/config/skills/prototypes/dado.py "<prompt del encargo>"   # Antigravity CLI
 python3 ~/.claude/skills/prototypes/dado.py "<prompt del encargo>"          # Claude Code
+python  %USERPROFILE%\.gemini\config\skills\prototypes\dado.py "<prompt del encargo>"   # Windows
 ```
 
 `dado.py` vive junto a este `SKILL.md`: si la skill esta en otra ruta, la del
