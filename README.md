@@ -1,23 +1,27 @@
 # ai-prototypes
 
-Cuatro prototipos visuales de una misma página que **de verdad no se parecen entre sí**.
+Seis prototipos visuales de una misma página que **de verdad no se parecen entre sí**.
 
 El problema que resuelve: si le pides a un modelo "tres opciones de diseño", te
 devuelve tres veces la mediana de su entrenamiento (una clara y minimalista, una
 oscura de lujo, una de papel). Aquí la dirección estética **no la elige el modelo**:
 la tira un dado, `dado.py`, con un catálogo de 12 familias (caelestia, nothing,
 liquid-glass, neumorphism, glassmorphism, industrial, claymorphism, producto, suizo,
-editorial, lujo, orgánico) cruzadas con 10 arquetipos de tarjeta.
+editorial, lujo, orgánico) cruzadas con 10 arquetipos de tarjeta, 10 de navegación y 12
+de cabecera. Cada prototipo sale con familia, `Nav`, `Hero` y `Card` distintos, así que la
+diferencia no está solo en el color.
 
 El dado recuerda las últimas tiradas y no las repite, así que no te sale siempre lo
-mismo. La skill obliga después a montar una página que compare los cuatro a la vez
+mismo. La skill obliga después a montar una página que compare los seis a la vez
 y a mirarla antes de entregar.
 
-![Cuatro prototipos de la misma carta de sushi](docs/comparativa.png)
+![Seis prototipos de la misma carta de sushi](docs/comparativa.png)
 
-*Una tirada real (`--semilla demo`): `lujo` + `documental`, `producto` + `fila`,
-`industrial` + `bento`, `suizo` + `dock`. Mismo contenido en los cuatro, misma comanda
-de 33,30 €, y cuatro páginas que no se parecen en nada.*
+*Una tirada real (`--semilla demo`) para un buffet de sushi con pedido por mesa: `lujo` +
+`medidor` + `bento`, `producto` + `manifiesto` + `dock`, `industrial` + `editorial` +
+`showcase`, `suizo` + `foto-split` + `documental`, `nothing` + `m3` + `dual`, `caelestia` +
+`masivo` + `tabla`. Los mismos seis platos y la misma comanda de 33,30 € en las seis, y
+ninguna se parece a otra.*
 
 ## Instalar
 
@@ -42,7 +46,7 @@ Banderas del dado (las usa el modelo, pero puedes lanzarlo a mano):
 
     python3 dado.py --semilla <texto>   repite exactamente la misma tirada
     python3 dado.py --evitar lujo       descarta una familia entera
-    python3 dado.py --solo suizo        fuerza una y sortea las otras tres
+    python3 dado.py --solo suizo        fuerza una y sortea las otras cinco
     python3 dado.py --repetir           ignora la memoria de tiradas recientes
 
 ## Ver el resultado

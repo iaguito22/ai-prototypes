@@ -140,6 +140,34 @@ CARDS = [
     {"id": "documental", "nombre": "Ficha Documental", "desc": "Estructura editorial con numeración FIG. 01, marco técnico y pie documental"}
 ]
 
+NAVS = [
+    {"id": "centrada", "nombre": "Navegación Centrada", "desc": "Enlaces 100% centrados en la página sin nombre de marca"},
+    {"id": "anonima", "nombre": "Cápsula Anónima", "desc": "Píldora suspendida con selectores de categoría/filtro, sin logotipo ni texto de marca"},
+    {"id": "split", "nombre": "Split Extremos", "desc": "Logotipo a la izquierda y enlaces/CTA a la derecha en los extremos del contenedor"},
+    {"id": "mono", "nombre": "Telemetría Mono", "desc": "Cabecera técnica en monospace continuo con marca, versión y enlaces en línea"},
+    {"id": "isla", "nombre": "Isla Flotante", "desc": "Píldora flotante compacta de vidrio suspendida con logo minimalista y enlaces"},
+    {"id": "apilada", "nombre": "Doble Fila Apilada", "desc": "Logotipo centrado en la fila superior y barra de enlaces centrada en la fila inferior"},
+    {"id": "chasis", "nombre": "Chasis Mecanizado", "desc": "Panel de ingeniería con tornillería en esquinas y selector de canal [01] [02]"},
+    {"id": "minimal", "nombre": "Minimal Directa", "desc": "Solo logotipo tipográfico a la izquierda y un botón de acción directo a la derecha"},
+    {"id": "subastas", "nombre": "Simétrica de Subastas", "desc": "Logotipo monumental al centro dividido por dos enlaces a cada lado entre filetes"},
+    {"id": "burbuja", "nombre": "Burbuja Táctil 3D", "desc": "Cápsula inflada redondeada con volumen suave y dot de estado activo"}
+]
+
+HEROS = [
+    {"id": "foto-split", "nombre": "Split con Fotografía", "desc": "Pantalla dividida con fotografía de alta resolución de producto/taller a un lado y texto al otro"},
+    {"id": "foto-hero", "nombre": "Fotografía Monumental", "desc": "Fotografía inmersiva a sangre con tratamiento de luz y titular tipográfico integrado"},
+    {"id": "centrado", "nombre": "Centrado Minimal", "desc": "Titular masivo y lead 100% centrados en columna única sin cajas laterales"},
+    {"id": "split", "nombre": "Split Gráfico 50/50", "desc": "Pantalla dividida con render técnico a la izquierda y texto a la derecha"},
+    {"id": "medidor", "nombre": "Telemetría & Medidor", "desc": "Consola técnica con barras de nivel, osciloscopio o cotas acústicas"},
+    {"id": "vitrina", "nombre": "Vitrina Pedestal", "desc": "Composición vertical centrada con el objeto sobre pedestal e insignia flotante"},
+    {"id": "editorial", "nombre": "Revista Doble Columna", "desc": "Titular con filete vertical y dos columnas de texto tipo publicación de diseño"},
+    {"id": "masivo", "nombre": "Tipografía Monumental", "desc": "Titular tipográfico a escala gigante que ocupa el ancho completo"},
+    {"id": "manifiesto", "nombre": "Manifiesto de Autor", "desc": "Cita textual del luthier/artesano en tipografía cursiva destacada con firma"},
+    {"id": "burbuja", "nombre": "Cojín Inflado 3D", "desc": "Volumen táctil suave con cápsula de relieve y badge convexo"},
+    {"id": "optica", "nombre": "Óptica Translúcida", "desc": "Panel de cristal con bisel iluminado y diagrama de ondas de fase"},
+    {"id": "m3", "nombre": "Capas Tonales M3", "desc": "Composición asimétrica por niveles tonales superpuestos"}
+]
+
 def cargar_historial():
     if os.path.exists(HISTORIAL_PATH):
         try:
@@ -158,7 +186,7 @@ def guardar_historial(ids):
         json.dump(historial, f, indent=2)
 
 def main():
-    parser = argparse.ArgumentParser(description="Tira el dado para 4 prototipos de diseño.")
+    parser = argparse.ArgumentParser(description="Tira el dado para 6 prototipos de diseño.")
     parser.add_argument("--semilla", type=str, help="Semilla para reproducir una tirada")
     parser.add_argument("--evitar", type=str, help="Familias a evitar separadas por coma")
     parser.add_argument("--solo", type=str, help="Forzar una familia específica")
@@ -172,26 +200,30 @@ def main():
     historial = [] if args.repetir else cargar_historial()
 
     candidatas = [f for f in FAMILIAS if f["id"] not in evitar and f["id"] not in historial]
-    if len(candidatas) < 4:
+    if len(candidatas) < 6:
         candidatas = [f for f in FAMILIAS if f["id"] not in evitar]
 
     if args.solo:
         elegidas = [f for f in FAMILIAS if f["id"] == args.solo]
         resto = [f for f in candidatas if f["id"] != args.solo]
-        elegidas.extend(random.sample(resto, 3))
+        elegidas.extend(random.sample(resto, 5))
     else:
-        elegidas = random.sample(candidatas, 4)
+        elegidas = random.sample(candidatas, 6)
 
-    cards_elegidas = random.sample(CARDS, 4)
+    cards_elegidas = random.sample(CARDS, 6)
+    navs_elegidas = random.sample(NAVS, 6)
+    heros_elegidos = random.sample(HEROS, 6)
 
     guardar_historial([f["id"] for f in elegidas])
 
-    print("Cuatro direcciones con familias de diseño y arquetipos de Card distintos.")
+    print("Seis direcciones con familias de diseño, arquetipos de Card, Nav y Hero distintos.")
     print("Cada una arranca en MODO CLARO por defecto e incluye botón para alternar a MODO OSCURO.\n")
 
-    for i, (f, c) in enumerate(zip(elegidas, cards_elegidas), 1):
+    for i, (f, c, n, h) in enumerate(zip(elegidas, cards_elegidas, navs_elegidas, heros_elegidos), 1):
         print("=" * 74)
         print(f"PROTOTIPO {i} — {f['nombre']}   [estilo: {f['id']}]")
+        print(f"NAV:         {n['id']} — {n['desc']}")
+        print(f"HERO:        {h['id']} — {h['desc']}")
         print(f"CARD:        {c['id']} — {c['desc']}")
         print(f"PALETA CLA:  {f['paleta_cla']}")
         print(f"PALETA OSC:  {f['paleta_osc']}")
