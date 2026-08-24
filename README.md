@@ -11,17 +11,23 @@ editorial, lujo, orgánico) cruzadas con 10 arquetipos de tarjeta, 10 de navegac
 de cabecera. Cada prototipo sale con familia, `Nav`, `Hero` y `Card` distintos, así que la
 diferencia no está solo en el color.
 
-El dado recuerda las últimas tiradas y no las repite, así que no te sale siempre lo
-mismo. La skill obliga después a montar una página que compare los seis a la vez
-y a mirarla antes de entregar.
+El dado tampoco tira a ciegas: le pasas el encargo entre comillas, clasifica el sector
+entre 12 arquetipos de negocio (hardware, lujo, SaaS, gastronomía, salud, fintech, moda,
+inmobiliaria, automoción, educación, portfolio, e-commerce) y reparte las seis direcciones
+en **tres franjas** — dos comerciales, dos técnicas y dos de vanguardia. Así ninguna de las
+seis es una apuesta perdida, pero dos siguen siendo arriesgadas.
+
+El dado guarda memoria de las últimas tiradas y evita repetirlas mientras el sector le deje
+margen. La skill obliga después a montar una página que compare los seis a la vez y a
+mirarla antes de entregar.
 
 ![Seis prototipos de la misma carta de sushi](docs/comparativa.png)
 
-*Una tirada real (`--semilla demo`) para un buffet de sushi con pedido por mesa: `lujo` +
-`medidor` + `bento`, `producto` + `manifiesto` + `dock`, `industrial` + `editorial` +
-`showcase`, `suizo` + `foto-split` + `documental`, `nothing` + `m3` + `dual`, `caelestia` +
-`masivo` + `tabla`. Los mismos seis platos y la misma comanda de 33,30 € en las seis, y
-ninguna se parece a otra.*
+*Seis prototipos para un buffet de sushi con pedido por mesa: `lujo` + `medidor` + `bento`,
+`producto` + `manifiesto` + `dock`, `industrial` + `editorial` + `showcase`, `suizo` +
+`foto-split` + `documental`, `nothing` + `m3` + `dual`, `caelestia` + `masivo` + `tabla`.
+Los mismos seis platos y la misma comanda de 33,30 € en las seis, y ninguna se parece a
+otra.*
 
 ## Instalar
 
@@ -37,17 +43,21 @@ Necesita `python3` para el dado. Nada más.
 
 ## Usar
 
-    /prototypes necesito una web para un bufet de sushi donde se pida por mesa
+    /prototypes necesito una web para una tienda de auriculares hi-fi
 
 Se activa también sola cuando pides "varias versiones", "opciones de diseño" o
 arrancas un diseño sin dirección estética decidida.
 
 Banderas del dado (las usa el modelo, pero puedes lanzarlo a mano):
 
-    python3 dado.py --semilla <texto>   repite exactamente la misma tirada
-    python3 dado.py --evitar lujo       descarta una familia entera
-    python3 dado.py --solo suizo        fuerza una y sortea las otras cinco
-    python3 dado.py --repetir           ignora la memoria de tiradas recientes
+    python3 dado.py "tienda de auriculares"   detecta el sector y pondera la tirada
+    python3 dado.py --listar-objetivos        lista los 12 arquetipos de negocio
+    python3 dado.py --objetivo saas_b2b       fuerza un sector en vez de detectarlo
+    python3 dado.py --aleatorio               azar puro, sin ponderar por sector
+    python3 dado.py --semilla <texto>         repite exactamente la misma tirada
+    python3 dado.py --evitar lujo             descarta una familia entera
+    python3 dado.py --solo suizo              fuerza una y sortea las otras cinco
+    python3 dado.py --repetir                 ignora la memoria de tiradas recientes
 
 ## Ver el resultado
 

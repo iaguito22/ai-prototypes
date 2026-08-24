@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-dado.py — Selector de cuatro direcciones completas para prototipos.
-Garantiza 4 prototipos visualmente distintos con:
-- 12 Familias de Diseño
-- 10 Arquetipos de Card de Producto (nombres directos de 1 palabra)
-- Soporte dual: MODO CLARO (por defecto) y MODO OSCURO
+dado.py — Selector inteligente de 6 direcciones ortogonales para prototipos.
+Optimizado con matriz de arquetipos de negocio (Intents) y selección en 3 franjas:
+1. Comercial (2 prototipos de alta conversión)
+2. Técnico (2 prototipos de rigor funcional/datos)
+3. Vanguardia (2 prototipos de impacto visual/emoción)
 """
 
 import random
@@ -12,9 +12,13 @@ import sys
 import os
 import json
 import argparse
+import unicodedata
 
-# El historial vive junto a este script, sea cual sea la ruta de instalacion.
 HISTORIAL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".historial.json")
+
+# ==============================================================================
+# 1. CATÁLOGO COMPLETO DE ELEMENTOS (GLOSARIO DE 1 PALABRA)
+# ==============================================================================
 
 FAMILIAS = [
     {
@@ -168,6 +172,398 @@ HEROS = [
     {"id": "m3", "nombre": "Capas Tonales M3", "desc": "Composición asimétrica por niveles tonales superpuestos"}
 ]
 
+# Mapas de acceso rápido por ID
+FAMILIAS_MAP = {f["id"]: f for f in FAMILIAS}
+CARDS_MAP = {c["id"]: c for c in CARDS}
+NAVS_MAP = {n["id"]: n for n in NAVS}
+HEROS_MAP = {h["id"]: h for h in HEROS}
+
+# ==============================================================================
+# 2. CATÁLOGO EXTENSO DE ARQUETIPOS DE ENCARGO / INTENTS
+# ==============================================================================
+
+OBJETIVOS = {
+    "hardware_tech": {
+        "nombre": "Hardware & Electrónica de Consumo",
+        "desc": "Móviles, auriculares, relojes, ordenadores, audio Hi-Fi, periféricos, robótica, gadgets, IoT",
+        "keywords": [
+            "movil", "moviles", "smartphone", "telefono", "telefonos", "auricular", "auriculares",
+            "reloj", "relojes", "smartwatch", "hardware", "gadget", "gadgets", "tech", "tecnologia",
+            "audio", "hifi", "altavoz", "altavoces", "sonido", "pc", "ordenador", "teclado", "mouse",
+            "chip", "procesador", "componentes", "robot", "robotica", "drone", "camara", "pantalla"
+        ],
+        "comercial": {
+            "estilos": ["liquid-glass", "producto", "glassmorphism"],
+            "heros": ["foto-split", "foto-hero", "m3"],
+            "cards": ["bento", "dock", "dual"],
+            "navs": ["anonima", "minimal", "burbuja", "split"]
+        },
+        "tecnico": {
+            "estilos": ["nothing", "industrial", "suizo"],
+            "heros": ["medidor", "optica", "masivo"],
+            "cards": ["specs", "tabla", "fila"],
+            "navs": ["chasis", "mono", "split"]
+        },
+        "vanguardia": {
+            "estilos": ["caelestia", "claymorphism", "neumorphism"],
+            "heros": ["vitrina", "burbuja", "split"],
+            "cards": ["split", "showcase", "acordeon"],
+            "navs": ["isla", "centrada", "burbuja"]
+        }
+    },
+
+    "lujo_artesania": {
+        "nombre": "Lujo, Alta Artesanía & Haute Horlogerie",
+        "desc": "Joyería fina, relojería artesanal, luthería, marroquinería, perfumería nicho, alta costura, objetos de colección",
+        "keywords": [
+            "lujo", "joya", "joyas", "joyeria", "oro", "diamante", "relojeria", "artesania", "artesanal",
+            "luthier", "lutheria", "madera noble", "cuero", "perfume", "perfumeria", "atelier",
+            "haute", "reloj mecanico", "subasta", "alta costura", "sastre", "orfebreria", "cristal",
+            "porcelana", "vino de autor", "reliquia", "coleccionista"
+        ],
+        "comercial": {
+            "estilos": ["lujo", "organico", "editorial"],
+            "heros": ["manifiesto", "foto-hero", "centrado"],
+            "cards": ["showcase", "bento", "split"],
+            "navs": ["subastas", "apilada", "centrada"]
+        },
+        "tecnico": {
+            "estilos": ["suizo", "editorial", "industrial"],
+            "heros": ["editorial", "foto-split", "masivo"],
+            "cards": ["documental", "tabla", "specs"],
+            "navs": ["mono", "split", "apilada"]
+        },
+        "vanguardia": {
+            "estilos": ["liquid-glass", "caelestia", "organico"],
+            "heros": ["vitrina", "optica", "centrado"],
+            "cards": ["bento", "showcase", "dual"],
+            "navs": ["isla", "anonima", "subastas"]
+        }
+    },
+
+    "saas_b2b": {
+        "nombre": "SaaS, Developer Tools & Plataformas B2B",
+        "desc": "Software cloud, APIs, herramientas de programación, analítica, dashboards, ciberseguridad, productividad",
+        "keywords": [
+            "saas", "software", "app", "b2b", "developer", "dev", "api", "dashboard", "analytics",
+            "cloud", "seguridad", "ciberseguridad", "productividad", "crm", "erp", "gestion", "workflow",
+            "plataforma", "infraestructura", "servidores", "database", "devops", "ia", "ai", "agente"
+        ],
+        "comercial": {
+            "estilos": ["producto", "liquid-glass", "glassmorphism"],
+            "heros": ["m3", "editorial", "split"],
+            "cards": ["dock", "bento", "dual"],
+            "navs": ["minimal", "split", "anonima"]
+        },
+        "tecnico": {
+            "estilos": ["nothing", "suizo", "industrial"],
+            "heros": ["medidor", "masivo", "optica"],
+            "cards": ["specs", "tabla", "fila"],
+            "navs": ["mono", "chasis", "split"]
+        },
+        "vanguardia": {
+            "estilos": ["caelestia", "claymorphism", "neumorphism"],
+            "heros": ["burbuja", "vitrina", "foto-split"],
+            "cards": ["split", "acordeon", "documental"],
+            "navs": ["isla", "burbuja", "centrada"]
+        }
+    },
+
+    "gastro_restauracion": {
+        "nombre": "Gastronomía, Restauración & Bebidas de Autor",
+        "desc": "Restaurantes de autor, cafeterías de especialidad, bistrós, bodegas, pastelería artesanal, coctelerías",
+        "keywords": [
+            "restaurante", "carta", "menu", "plato", "platos", "comida", "gastro", "gastronomia", "chef",
+            "cocina", "cafe", "cafeteria", "bistro", "vino", "bodega", "cerveza", "coctel", "cocteleria",
+            "panaderia", "pasteleria", "dulce", "tapa", "tapas", "maridaje", "degustacion", "brunch"
+        ],
+        "comercial": {
+            "estilos": ["organico", "editorial", "lujo"],
+            "heros": ["foto-hero", "centrado", "manifiesto"],
+            "cards": ["fila", "bento", "showcase"],
+            "navs": ["centrada", "subastas", "split"]
+        },
+        "tecnico": {
+            "estilos": ["suizo", "editorial", "producto"],
+            "heros": ["editorial", "foto-split", "masivo"],
+            "cards": ["documental", "tabla", "dual"],
+            "navs": ["apilada", "split", "minimal"]
+        },
+        "vanguardia": {
+            "estilos": ["claymorphism", "caelestia", "liquid-glass"],
+            "heros": ["burbuja", "vitrina", "optica"],
+            "cards": ["dock", "acordeon", "split"],
+            "navs": ["burbuja", "isla", "anonima"]
+        }
+    },
+
+    "portfolio_creativo": {
+        "nombre": "Estudios Creativos, Arquitectura & Fotografía",
+        "desc": "Portfolios de arquitectura, estudios de diseño gráfico/industrial, fotografía de autor, directores de arte, cine",
+        "keywords": [
+            "portfolio", "estudio", "arquitectura", "arquitecto", "fotografia", "fotografo", "diseño",
+            "diseñador", "arte", "artista", "galeria", "exposicion", "cine", "audiovisual", "editorial",
+            "director de arte", "motion", "branding", "interiorismo", "render", "3d", "escultura"
+        ],
+        "comercial": {
+            "estilos": ["editorial", "suizo", "organico"],
+            "heros": ["foto-hero", "editorial", "centrado"],
+            "cards": ["documental", "showcase", "bento"],
+            "navs": ["split", "centrada", "minimal"]
+        },
+        "tecnico": {
+            "estilos": ["nothing", "industrial", "suizo"],
+            "heros": ["masivo", "foto-split", "medidor"],
+            "cards": ["specs", "documental", "tabla"],
+            "navs": ["mono", "chasis", "split"]
+        },
+        "vanguardia": {
+            "estilos": ["caelestia", "liquid-glass", "lujo"],
+            "heros": ["manifiesto", "vitrina", "optica"],
+            "cards": ["split", "dock", "dual"],
+            "navs": ["isla", "anonima", "apilada"]
+        }
+    },
+
+    "salud_wellness": {
+        "nombre": "Salud, Bienestar & Clínicas Especializadas",
+        "desc": "Clínicas dentales/médicas, cosmética clínica, spas, suplementación avanzada, biotecnología médica, fitness",
+        "keywords": [
+            "salud", "clinica", "medico", "medica", "dental", "dentista", "wellness", "spa", "bienestar",
+            "cosmetica", "dermatologia", "skincare", "suplemento", "suplementos", "nutricion", "fitness",
+            "psicologia", "terapia", "fisioterapia", "hospital", "biomedicina", "longevidad"
+        ],
+        "comercial": {
+            "estilos": ["liquid-glass", "producto", "organico"],
+            "heros": ["foto-split", "centrado", "foto-hero"],
+            "cards": ["bento", "dual", "dock"],
+            "navs": ["minimal", "anonima", "split"]
+        },
+        "tecnico": {
+            "estilos": ["suizo", "nothing", "industrial"],
+            "heros": ["optica", "medidor", "editorial"],
+            "cards": ["specs", "tabla", "acordeon"],
+            "navs": ["mono", "split", "chasis"]
+        },
+        "vanguardia": {
+            "estilos": ["caelestia", "glassmorphism", "claymorphism"],
+            "heros": ["vitrina", "burbuja", "m3"],
+            "cards": ["showcase", "split", "fila"],
+            "navs": ["isla", "burbuja", "centrada"]
+        }
+    },
+
+    "fintech_crypto": {
+        "nombre": "Fintech, Inversión & Finanzas Digitales",
+        "desc": "Neobancos, plataformas de inversión, pasarelas de pago, cripto/DeFi, gestión patrimonial, auditoría",
+        "keywords": [
+            "fintech", "finanzas", "banco", "neobanco", "inversion", "trading", "crypto", "cripto", "bitcoin",
+            "ethereum", "defi", "patrimonio", "fondos", "pago", "pagos", "tarjeta", "broker", "bolsa",
+            "auditoria", "fiscal", "prestamo", "wallet"
+        ],
+        "comercial": {
+            "estilos": ["producto", "liquid-glass", "glassmorphism"],
+            "heros": ["m3", "editorial", "split"],
+            "cards": ["dock", "bento", "dual"],
+            "navs": ["minimal", "split", "anonima"]
+        },
+        "tecnico": {
+            "estilos": ["nothing", "suizo", "industrial"],
+            "heros": ["medidor", "masivo", "optica"],
+            "cards": ["tabla", "specs", "fila"],
+            "navs": ["mono", "chasis", "split"]
+        },
+        "vanguardia": {
+            "estilos": ["caelestia", "lujo", "neumorphism"],
+            "heros": ["vitrina", "manifiesto", "foto-split"],
+            "cards": ["split", "documental", "showcase"],
+            "navs": ["isla", "subastas", "centrada"]
+        }
+    },
+
+    "moda_streetwear": {
+        "nombre": "Moda, Streetwear & Apparel Técnico",
+        "desc": "Marcas de ropa, streetwear, calzado técnico, sastrería contemporánea, colecciones cápsula, accesorios",
+        "keywords": [
+            "moda", "ropa", "streetwear", "sneakers", "zapatillas", "calzado", "apparel", "sastrería",
+            "textil", "abrigo", "chaqueta", "camiseta", "hoodie", "tienda ropa", "coleccion capsula",
+            "prendas", "outdoor", "goretex", "tendencia"
+        ],
+        "comercial": {
+            "estilos": ["editorial", "suizo", "producto"],
+            "heros": ["foto-hero", "foto-split", "masivo"],
+            "cards": ["bento", "fila", "showcase"],
+            "navs": ["split", "minimal", "centrada"]
+        },
+        "tecnico": {
+            "estilos": ["nothing", "industrial", "suizo"],
+            "heros": ["medidor", "masivo", "editorial"],
+            "cards": ["specs", "documental", "tabla"],
+            "navs": ["chasis", "mono", "split"]
+        },
+        "vanguardia": {
+            "estilos": ["claymorphism", "lujo", "caelestia"],
+            "heros": ["manifiesto", "burbuja", "vitrina"],
+            "cards": ["dock", "split", "dual"],
+            "navs": ["burbuja", "subastas", "isla"]
+        }
+    },
+
+    "inmobiliaria_espacios": {
+        "nombre": "Inmobiliaria de Lujo & Espacios Exclusivos",
+        "desc": "Promociones residenciales de lujo, villas, espacios de coworking premium, hoteles boutique, interiorismo",
+        "keywords": [
+            "inmobiliaria", "vivienda", "viviendas", "casa", "casas", "piso", "pisos", "villa", "villas",
+            "mansion", "atico", "edificio", "promocion", "coworking", "hotel", "hotel boutique",
+            "residencia", "inmueble", "finca", "terreno", "propiedad"
+        ],
+        "comercial": {
+            "estilos": ["lujo", "organico", "editorial"],
+            "heros": ["foto-hero", "manifiesto", "centrado"],
+            "cards": ["showcase", "bento", "split"],
+            "navs": ["subastas", "apilada", "centrada"]
+        },
+        "tecnico": {
+            "estilos": ["suizo", "editorial", "producto"],
+            "heros": ["editorial", "foto-split", "masivo"],
+            "cards": ["documental", "tabla", "specs"],
+            "navs": ["mono", "split", "minimal"]
+        },
+        "vanguardia": {
+            "estilos": ["caelestia", "liquid-glass", "organico"],
+            "heros": ["vitrina", "optica", "burbuja"],
+            "cards": ["dock", "dual", "acordeon"],
+            "navs": ["isla", "anonima", "burbuja"]
+        }
+    },
+
+    "automocion_movilidad": {
+        "nombre": "Automoción, Movilidad Eléctrica & Motorsport",
+        "desc": "Coches eléctricos, hiperdeportivos, motocicletas de autor, bicicletas técnicas, náutica, aviación privada",
+        "keywords": [
+            "coche", "coches", "auto", "autos", "automocion", "motor", "electrico", "ev", "moto", "motos",
+            "motocicleta", "bici", "bicicleta", "movilidad", "nautica", "barco", "yate", "avion", "aero",
+            "hiperdeportivo", "supercar", "vehiculo"
+        ],
+        "comercial": {
+            "estilos": ["liquid-glass", "producto", "lujo"],
+            "heros": ["foto-hero", "foto-split", "m3"],
+            "cards": ["bento", "showcase", "dual"],
+            "navs": ["split", "minimal", "subastas"]
+        },
+        "tecnico": {
+            "estilos": ["industrial", "nothing", "suizo"],
+            "heros": ["medidor", "masivo", "optica"],
+            "cards": ["specs", "tabla", "fila"],
+            "navs": ["chasis", "mono", "split"]
+        },
+        "vanguardia": {
+            "estilos": ["caelestia", "glassmorphism", "claymorphism"],
+            "heros": ["vitrina", "burbuja", "split"],
+            "cards": ["dock", "split", "documental"],
+            "navs": ["isla", "anonima", "burbuja"]
+        }
+    },
+
+    "educacion_cultura": {
+        "nombre": "Educación, Cultura & Editoriales",
+        "desc": "Academias de programación, escuelas de negocios, museos, fundaciones culturales, editoriales, congresos",
+        "keywords": [
+            "educacion", "curso", "cursos", "academia", "escuela", "universidad", "master", "bootcamp",
+            "cultura", "museo", "fundacion", "libro", "libros", "editorial", "conferencia", "evento",
+            "investigacion", "ciencia", "historia", "divulgacion"
+        ],
+        "comercial": {
+            "estilos": ["editorial", "suizo", "producto"],
+            "heros": ["editorial", "centrado", "foto-split"],
+            "cards": ["bento", "documental", "fila"],
+            "navs": ["split", "centrada", "minimal"]
+        },
+        "tecnico": {
+            "estilos": ["suizo", "nothing", "editorial"],
+            "heros": ["masivo", "medidor", "foto-hero"],
+            "cards": ["tabla", "specs", "acordeon"],
+            "navs": ["mono", "apilada", "chasis"]
+        },
+        "vanguardia": {
+            "estilos": ["caelestia", "organico", "lujo"],
+            "heros": ["manifiesto", "vitrina", "burbuja"],
+            "cards": ["dock", "split", "showcase"],
+            "navs": ["isla", "subastas", "anonima"]
+        }
+    },
+
+    "general_ecommerce": {
+        "nombre": "E-Commerce & Retail Directo al Consumidor",
+        "desc": "Tiendas online multimarca, retail directo D2C, productos de consumo, hogar, regalos, belleza general",
+        "keywords": [
+            "tienda", "tiendas", "ecommerce", "e-commerce", "comprar", "venta", "retail", "shop",
+            "carrito", "producto", "productos", "catalogo", "ofertas", "descuentos", "hogar", "regalo", "regalos"
+        ],
+        "comercial": {
+            "estilos": ["producto", "liquid-glass", "editorial"],
+            "heros": ["foto-hero", "foto-split", "centrado"],
+            "cards": ["bento", "fila", "dock"],
+            "navs": ["split", "minimal", "anonima"]
+        },
+        "tecnico": {
+            "estilos": ["suizo", "nothing", "industrial"],
+            "heros": ["optica", "medidor", "masivo"],
+            "cards": ["tabla", "specs", "dual"],
+            "navs": ["mono", "chasis", "split"]
+        },
+        "vanguardia": {
+            "estilos": ["organico", "claymorphism", "caelestia"],
+            "heros": ["burbuja", "vitrina", "manifiesto"],
+            "cards": ["showcase", "split", "acordeon"],
+            "navs": ["burbuja", "isla", "subastas"]
+        }
+    }
+}
+
+# ==============================================================================
+# 3. FUNCIONES DE NORMALIZACIÓN Y DETECCIÓN SEMÁNTICA
+# ==============================================================================
+
+def normalizar_texto(texto):
+    if not texto:
+        return ""
+    texto = texto.lower()
+    # Eliminar tildes y diacríticos
+    return ''.join(c for c in unicodedata.normalize('NFD', texto) if unicodedata.category(c) != 'Mn')
+
+def detectar_objetivo(prompt):
+    if not prompt:
+        return "general_ecommerce", 0
+    
+    prompt_norm = normalizar_texto(prompt)
+    palabras = set(prompt_norm.replace("/", " ").replace(",", " ").replace(".", " ").replace("-", " ").split())
+    
+    puntuaciones = {}
+    for obj_id, obj_data in OBJETIVOS.items():
+        score = 0
+        for kw in obj_data["keywords"]:
+            kw_norm = normalizar_texto(kw)
+            if " " in kw_norm:
+                if kw_norm in prompt_norm:
+                    score += 3
+            elif kw_norm in palabras:
+                score += 2
+            elif len(kw_norm) > 4 and kw_norm in prompt_norm:
+                score += 1
+        puntuaciones[obj_id] = score
+    
+    mejor_obj = max(puntuaciones, key=puntuaciones.get)
+    mejor_score = puntuaciones[mejor_obj]
+    
+    if mejor_score > 0:
+        return mejor_obj, mejor_score
+    return "general_ecommerce", 0
+
+# ==============================================================================
+# 4. GESTIÓN DE HISTORIAL
+# ==============================================================================
+
 def cargar_historial():
     if os.path.exists(HISTORIAL_PATH):
         try:
@@ -185,43 +581,184 @@ def guardar_historial(ids):
     with open(HISTORIAL_PATH, "w", encoding="utf-8") as f:
         json.dump(historial, f, indent=2)
 
+# ==============================================================================
+# 5. MOTOR DE SELECCIÓN EN 3 FRANJAS ORTOGONALES
+# ==============================================================================
+
+def seleccionar_seis_direcciones(objetivo_id, evitar=None, solo=None, usar_historial=True):
+    evitar = evitar or []
+    historial = cargar_historial() if usar_historial else []
+    
+    obj = OBJETIVOS.get(objetivo_id, OBJETIVOS["general_ecommerce"])
+    
+    # 3 Franjas: 2 Comercial, 2 Técnico, 2 Vanguardia
+    franjas = [
+        ("comercial", obj["comercial"], "Comercial / Alta Conversión"),
+        ("comercial", obj["comercial"], "Comercial / Alta Conversión"),
+        ("tecnico", obj["tecnico"], "Técnico / Rigor Funcional"),
+        ("tecnico", obj["tecnico"], "Técnico / Rigor Funcional"),
+        ("vanguardia", obj["vanguardia"], "Vanguardia / Emoción Visual"),
+        ("vanguardia", obj["vanguardia"], "Vanguardia / Emoción Visual")
+    ]
+    
+    # Si se pide forzar una familia con --solo
+    estilos_usados = []
+    navs_usadas = []
+    heros_usados = []
+    cards_usadas = []
+    
+    resultado = []
+    
+    # Si hay un --solo, colocarlo en la primera posición
+    if solo and solo in FAMILIAS_MAP:
+        f_solo = FAMILIAS_MAP[solo]
+        estilos_usados.append(f_solo["id"])
+    
+    for idx, (franja_nombre, franja_data, franja_label) in enumerate(franjas):
+        # 1. Elegir Estilo
+        if idx == 0 and solo and solo in FAMILIAS_MAP:
+            f = FAMILIAS_MAP[solo]
+        else:
+            candidatos_estilo = [
+                f_id for f_id in franja_data["estilos"]
+                if f_id not in estilos_usados and f_id not in evitar and f_id not in historial
+            ]
+            if not candidatos_estilo:
+                candidatos_estilo = [
+                    f_id for f_id in franja_data["estilos"]
+                    if f_id not in estilos_usados and f_id not in evitar
+                ]
+            if not candidatos_estilo:
+                # Fallback a todas las familias no usadas
+                candidatos_estilo = [f["id"] for f in FAMILIAS if f["id"] not in estilos_usados and f["id"] not in evitar]
+            
+            f_id = random.choice(candidatos_estilo)
+            estilos_usados.append(f_id)
+            f = FAMILIAS_MAP[f_id]
+        
+        # 2. Elegir Hero
+        candidatos_hero = [h_id for h_id in franja_data["heros"] if h_id not in heros_usados]
+        if not candidatos_hero:
+            candidatos_hero = [h["id"] for h in HEROS if h["id"] not in heros_usados]
+        h_id = random.choice(candidatos_hero)
+        heros_usados.append(h_id)
+        h = HEROS_MAP[h_id]
+        
+        # 3. Elegir Card (Regla de anti-colisión: si hero es foto-split o split, card no debe ser split si es posible)
+        candidatos_card = [
+            c_id for c_id in franja_data["cards"]
+            if c_id not in cards_usadas and not (("split" in h_id) and c_id == "split")
+        ]
+        if not candidatos_card:
+            candidatos_card = [c_id for c_id in franja_data["cards"] if c_id not in cards_usadas]
+        if not candidatos_card:
+            candidatos_card = [c["id"] for c in CARDS if c["id"] not in cards_usadas]
+        c_id = random.choice(candidatos_card)
+        cards_usadas.append(c_id)
+        c = CARDS_MAP[c_id]
+        
+        # 4. Elegir Nav
+        candidatos_nav = [n_id for n_id in franja_data["navs"] if n_id not in navs_usadas]
+        if not candidatos_nav:
+            candidatos_nav = [n["id"] for n in NAVS if n["id"] not in navs_usadas]
+        n_id = random.choice(candidatos_nav)
+        navs_usadas.append(n_id)
+        n = NAVS_MAP[n_id]
+        
+        resultado.append({
+            "franja": franja_label,
+            "estilo": f,
+            "card": c,
+            "nav": n,
+            "hero": h
+        })
+    
+    guardar_historial(estilos_usados)
+    return resultado
+
+# ==============================================================================
+# 6. INTERFAZ CLI
+# ==============================================================================
+
 def main():
-    parser = argparse.ArgumentParser(description="Tira el dado para 6 prototipos de diseño.")
-    parser.add_argument("--semilla", type=str, help="Semilla para reproducir una tirada")
-    parser.add_argument("--evitar", type=str, help="Familias a evitar separadas por coma")
+    parser = argparse.ArgumentParser(description="Tira el dado para 6 prototipos de diseño orientados a objetivo.")
+    parser.add_argument("prompt", nargs="*", help="Texto del encargo o palabras clave para autodetección")
+    parser.add_argument("--objetivo", "-o", type=str, choices=list(OBJETIVOS.keys()), help="Forzar un arquetipo de encargo específico")
+    parser.add_argument("--listar-objetivos", action="store_true", help="Listar todos los arquetipos de negocio disponibles")
+    parser.add_argument("--semilla", "-s", type=str, help="Semilla para reproducir una tirada exacta")
+    parser.add_argument("--evitar", "-e", type=str, help="Familias a evitar separadas por coma")
     parser.add_argument("--solo", type=str, help="Forzar una familia específica")
-    parser.add_argument("--repetir", action="store_true", help="Ignorar el historial de tiradas recientes")
+    parser.add_argument("--repetir", "-r", action="store_true", help="Ignorar el historial de tiradas recientes")
+    parser.add_argument("--aleatorio", "-a", action="store_true", help="Desactivar ponderación por objetivo y usar azar puro")
     args = parser.parse_args()
+
+    if args.listar_objetivos:
+        print("ARQUETIPOS DE NEGOCIO DISPONIBLES EN EL DADO:")
+        print("=" * 74)
+        for obj_id, data in OBJETIVOS.items():
+            print(f"• {obj_id:<22} — {data['nombre']}")
+            print(f"  {data['desc']}")
+        sys.exit(0)
 
     if args.semilla:
         random.seed(args.semilla)
 
     evitar = [x.strip() for x in args.evitar.split(",")] if args.evitar else []
-    historial = [] if args.repetir else cargar_historial()
 
-    candidatas = [f for f in FAMILIAS if f["id"] not in evitar and f["id"] not in historial]
-    if len(candidatas) < 6:
-        candidatas = [f for f in FAMILIAS if f["id"] not in evitar]
-
-    if args.solo:
-        elegidas = [f for f in FAMILIAS if f["id"] == args.solo]
-        resto = [f for f in candidatas if f["id"] != args.solo]
-        elegidas.extend(random.sample(resto, 5))
+    # Determinar objetivo
+    prompt_completo = " ".join(args.prompt) if args.prompt else ""
+    
+    if args.aleatorio:
+        objetivo_usado = None
+        origen_obj = "Azar puro (--aleatorio)"
+    elif args.objetivo:
+        objetivo_usado = args.objetivo
+        origen_obj = f"Fijado explícitamente ({OBJETIVOS[objetivo_usado]['nombre']})"
+    elif prompt_completo:
+        detectado, score = detectar_objetivo(prompt_completo)
+        objetivo_usado = detectado
+        origen_obj = f"Autodetectado ({OBJETIVOS[objetivo_usado]['nombre']} · score {score})"
     else:
+        objetivo_usado = "general_ecommerce"
+        origen_obj = "Por defecto (General E-Commerce)"
+
+    if args.aleatorio:
+        # Modo clásico aleatorio puro
+        candidatas = [f for f in FAMILIAS if f["id"] not in evitar]
         elegidas = random.sample(candidatas, 6)
-
-    cards_elegidas = random.sample(CARDS, 6)
-    navs_elegidas = random.sample(NAVS, 6)
-    heros_elegidos = random.sample(HEROS, 6)
-
-    guardar_historial([f["id"] for f in elegidas])
+        cards_elegidas = random.sample(CARDS, 6)
+        navs_elegidas = random.sample(NAVS, 6)
+        heros_elegidos = random.sample(HEROS, 6)
+        
+        direcciones = []
+        for i, (f, c, n, h) in enumerate(zip(elegidas, cards_elegidas, navs_elegidas, heros_elegidos), 1):
+            direcciones.append({
+                "franja": "Azar Puro",
+                "estilo": f,
+                "card": c,
+                "nav": n,
+                "hero": h
+            })
+    else:
+        direcciones = seleccionar_seis_direcciones(
+            objetivo_id=objetivo_usado,
+            evitar=evitar,
+            solo=args.solo,
+            usar_historial=(not args.repetir)
+        )
 
     print("Seis direcciones con familias de diseño, arquetipos de Card, Nav y Hero distintos.")
+    print(f"Enfoque de selección: {origen_obj}")
     print("Cada una arranca en MODO CLARO por defecto e incluye botón para alternar a MODO OSCURO.\n")
 
-    for i, (f, c, n, h) in enumerate(zip(elegidas, cards_elegidas, navs_elegidas, heros_elegidos), 1):
+    for i, item in enumerate(direcciones, 1):
+        f = item["estilo"]
+        c = item["card"]
+        n = item["nav"]
+        h = item["hero"]
+        franja = item["franja"]
         print("=" * 74)
-        print(f"PROTOTIPO {i} — {f['nombre']}   [estilo: {f['id']}]")
+        print(f"PROTOTIPO {i} [{franja}] — {f['nombre']}   [estilo: {f['id']}]")
         print(f"NAV:         {n['id']} — {n['desc']}")
         print(f"HERO:        {h['id']} — {h['desc']}")
         print(f"CARD:        {c['id']} — {c['desc']}")

@@ -16,19 +16,26 @@ entrenamiento. Aqui **la direccion no la eliges tu**.
 ## Paso 1. Tira el dado. Obligatorio.
 
 ```
-python3 ~/.gemini/config/skills/prototypes/dado.py   # Antigravity CLI
-python3 ~/.claude/skills/prototypes/dado.py          # Claude Code
+python3 ~/.gemini/config/skills/prototypes/dado.py "<prompt del encargo>"   # Antigravity CLI
+python3 ~/.claude/skills/prototypes/dado.py "<prompt del encargo>"          # Claude Code
 ```
 
 `dado.py` vive junto a este `SKILL.md`: si la skill esta en otra ruta, la del
 dado es esa misma. No lo tires "de memoria": sin ejecutarlo no hay tirada.
 
-Te devuelve **seis direcciones completas** que rotan ortogonalmente entre las 12 familias de diseño del catálogo, sus 10 arquetipos de tarjeta (`Card`) y sus 10 distribuciones de navegación (`Nav`), con soporte para **MODO CLARO** (por defecto) y **MODO OSCURO**.
+Te devuelve **seis direcciones completas** estructuradas en **3 franjas ortogonales**:
+1. **Comercial / Alta Conversión (2 prototipos)**: estándares de alta conversión y claridad directa para el sector.
+2. **Técnico / Rigor Funcional (2 prototipos)**: enfoque en datos, tablas, telemetría y especificaciones de ingeniería.
+3. **Vanguardia / Emoción Visual (2 prototipos)**: exploraciones audaces de impacto visual y diferenciación estética.
 
-- El dado **recuerda las ultimas direcciones y no las repite**, para garantizar frescura. `--repetir` desactiva esa memoria si te da igual.
-- `--semilla <texto>` si quieres poder repetir la misma tirada.
+- **Autodetección inteligente**: pasa la descripción del encargo entre comillas y el dado clasificará automáticamente entre los 12 arquetipos de negocio (`hardware_tech`, `lujo_artesania`, `saas_b2b`, `gastro_restauracion`, `portfolio_creativo`, `salud_wellness`, `fintech_crypto`, `moda_streetwear`, `inmobiliaria_espacios`, `automocion_movilidad`, `educacion_cultura`, `general_ecommerce`).
+- `--objetivo <id>` para forzar un arquetipo específico (ej. `--objetivo hardware_tech`).
+- `--listar-objetivos` para ver todos los sectores soportados.
+- `--aleatorio` para desactivar la ponderación sectorial y usar azar uniforme puro.
+- El dado **recuerda las últimas direcciones y no las repite**. `--repetir` desactiva esa memoria.
+- `--semilla <texto>` si quieres reproducir una tirada exacta.
 - `--evitar <familia>` si el usuario ya ha descartado un mundo entero.
-- `--solo <familia>` para forzar una (ej. `--solo liquid-glass`, `--solo caelestia`, `--solo suizo`).
+- `--solo <familia>` para forzar una familia en la primera posición.
 
 ## Glosario de Nombres de Una Sola Palabra (Mix & Match)
 
