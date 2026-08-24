@@ -1,4 +1,4 @@
-# prototipos
+# ai-prototypes
 
 Cuatro prototipos visuales de una misma página que **de verdad no se parecen entre sí**.
 
@@ -23,17 +23,17 @@ de 33,30 €, y cuatro páginas que no se parecen en nada.*
 
 **Antigravity CLI**
 
-    git clone https://github.com/iaguito22/prototipos ~/.gemini/config/skills/prototipos
+    git clone https://github.com/iaguito22/ai-prototypes ~/.gemini/config/skills/prototypes
 
 **Claude Code**
 
-    git clone https://github.com/iaguito22/prototipos ~/.claude/skills/prototipos
+    git clone https://github.com/iaguito22/ai-prototypes ~/.claude/skills/prototypes
 
 Necesita `python3` para el dado. Nada más.
 
 ## Usar
 
-    /prototipos necesito una web para un bufet de sushi donde se pida por mesa
+    /prototypes necesito una web para un bufet de sushi donde se pida por mesa
 
 Se activa también sola cuando pides "varias versiones", "opciones de diseño" o
 arrancas un diseño sin dirección estética decidida.
@@ -48,7 +48,7 @@ Banderas del dado (las usa el modelo, pero puedes lanzarlo a mano):
 ## Ver el resultado
 
 El último paso pide **mirar** la comparativa antes de entregarla. Si tienes
-[`agy-ver`](https://github.com/iaguito22/porton-verificacion) vale `agy-ver abrir
+[`agy-ver`](https://github.com/iaguito22/a-gemini-more-like-claude) vale `agy-ver abrir
 comparar.html`; si no, sirve cualquier forma de ver la página de verdad.
 
 ## Licencia

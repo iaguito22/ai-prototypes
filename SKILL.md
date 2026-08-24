@@ -1,8 +1,8 @@
 ---
-name: prototipos
+name: prototypes
 description: >-
   Cuatro prototipos visuales de verdad distintos de una misma pagina, adaptados al
-  encargo para comparar y elegir. Usala cuando el usuario diga "/prototipos",
+  encargo para comparar y elegir. Usala cuando el usuario diga "/prototypes",
   "hazme varias versiones", "dame opciones de diseño", "no se como quiero que se vea",
   o cuando arranque un diseño desde cero sin direccion estetica decidida.
 ---
@@ -16,8 +16,8 @@ entrenamiento. Aqui **la direccion no la eliges tu**.
 ## Paso 1. Tira el dado. Obligatorio.
 
 ```
-python3 ~/.gemini/config/skills/prototipos/dado.py   # Antigravity CLI
-python3 ~/.claude/skills/prototipos/dado.py          # Claude Code
+python3 ~/.gemini/config/skills/prototypes/dado.py   # Antigravity CLI
+python3 ~/.claude/skills/prototypes/dado.py          # Claude Code
 ```
 
 `dado.py` vive junto a este `SKILL.md`: si la skill esta en otra ruta, la del
