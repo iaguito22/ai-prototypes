@@ -190,7 +190,8 @@ OBJETIVOS = {
             "movil", "moviles", "smartphone", "telefono", "telefonos", "auricular", "auriculares",
             "reloj", "relojes", "smartwatch", "hardware", "gadget", "gadgets", "tech", "tecnologia",
             "audio", "hifi", "altavoz", "altavoces", "sonido", "pc", "ordenador", "teclado", "mouse",
-            "chip", "procesador", "componentes", "robot", "robotica", "drone", "camara", "pantalla"
+            "chip", "procesador", "componentes", "robot", "robotica", "drone", "camara", "pantalla",
+            "tablet", "portatil", "monitor", "impresora", "cargador", "bateria", "domotica", "sensor", "microfono", "amplificador", "tocadiscos", "auriculares inalambricos"
         ],
         "comercial": {
             "estilos": ["liquid-glass", "producto", "glassmorphism"],
@@ -275,7 +276,8 @@ OBJETIVOS = {
         "keywords": [
             "restaurante", "carta", "menu", "plato", "platos", "comida", "gastro", "gastronomia", "chef",
             "cocina", "cafe", "cafeteria", "bistro", "vino", "bodega", "cerveza", "coctel", "cocteleria",
-            "panaderia", "pasteleria", "dulce", "tapa", "tapas", "maridaje", "degustacion", "brunch"
+            "panaderia", "pasteleria", "dulce", "tapa", "tapas", "maridaje", "degustacion", "brunch",
+            "sushi", "sake", "ramen", "izakaya", "pizza", "pizzeria", "hamburguesa", "hamburgueseria", "buffet", "bufet", "barra", "asador", "parrilla", "marisqueria", "taberna", "arroceria", "comensal", "comensales", "raciones", "postre", "postres", "cata", "reservas", "por mesa", "carta digital", "menu del dia"
         ],
         "comercial": {
             "estilos": ["organico", "editorial", "lujo"],
@@ -303,7 +305,8 @@ OBJETIVOS = {
         "keywords": [
             "portfolio", "estudio", "arquitectura", "arquitecto", "fotografia", "fotografo", "diseño",
             "diseñador", "arte", "artista", "galeria", "exposicion", "cine", "audiovisual", "editorial",
-            "director de arte", "motion", "branding", "interiorismo", "render", "3d", "escultura"
+            "director de arte", "motion", "branding", "interiorismo", "render", "3d", "escultura",
+            "ilustracion", "ilustrador", "tipografia", "retrato", "bodas"
         ],
         "comercial": {
             "estilos": ["editorial", "suizo", "organico"],
@@ -331,7 +334,8 @@ OBJETIVOS = {
         "keywords": [
             "salud", "clinica", "medico", "medica", "dental", "dentista", "wellness", "spa", "bienestar",
             "cosmetica", "dermatologia", "skincare", "suplemento", "suplementos", "nutricion", "fitness",
-            "psicologia", "terapia", "fisioterapia", "hospital", "biomedicina", "longevidad"
+            "psicologia", "terapia", "fisioterapia", "hospital", "biomedicina", "longevidad",
+            "gimnasio", "gym", "crossfit", "entrenamiento", "entrenador", "yoga", "pilates", "masaje", "masajes", "osteopatia", "nutricionista", "farmacia", "veterinaria", "veterinario", "podologia", "oftalmologia", "estetica", "balneario", "consulta medica", "entrenador personal"
         ],
         "comercial": {
             "estilos": ["liquid-glass", "producto", "organico"],
@@ -359,7 +363,8 @@ OBJETIVOS = {
         "keywords": [
             "fintech", "finanzas", "banco", "neobanco", "inversion", "trading", "crypto", "cripto", "bitcoin",
             "ethereum", "defi", "patrimonio", "fondos", "pago", "pagos", "tarjeta", "broker", "bolsa",
-            "auditoria", "fiscal", "prestamo", "wallet"
+            "auditoria", "fiscal", "prestamo", "wallet",
+            "banca", "hipoteca", "hipotecas", "seguros", "contabilidad", "impuestos", "ahorro", "cartera", "blockchain", "nft", "exchange", "remesas", "facturacion", "tpv", "asesoria fiscal", "app de banco", "cuenta bancaria"
         ],
         "comercial": {
             "estilos": ["producto", "liquid-glass", "glassmorphism"],
@@ -387,7 +392,8 @@ OBJETIVOS = {
         "keywords": [
             "moda", "ropa", "streetwear", "sneakers", "zapatillas", "calzado", "apparel", "sastrería",
             "textil", "abrigo", "chaqueta", "camiseta", "hoodie", "tienda ropa", "coleccion capsula",
-            "prendas", "outdoor", "goretex", "tendencia"
+            "prendas", "outdoor", "goretex", "tendencia",
+            "zapatos", "botas", "bolso", "bolsos", "vestido", "denim", "vaqueros", "sudadera", "gorra", "accesorios", "desfile"
         ],
         "comercial": {
             "estilos": ["editorial", "suizo", "producto"],
@@ -415,7 +421,8 @@ OBJETIVOS = {
         "keywords": [
             "inmobiliaria", "vivienda", "viviendas", "casa", "casas", "piso", "pisos", "villa", "villas",
             "mansion", "atico", "edificio", "promocion", "coworking", "hotel", "hotel boutique",
-            "residencia", "inmueble", "finca", "terreno", "propiedad"
+            "residencia", "inmueble", "finca", "terreno", "propiedad",
+            "alquiler", "apartamento", "apartamentos", "chalet", "duplex", "loft", "hostal", "casa rural", "obra nueva"
         ],
         "comercial": {
             "estilos": ["lujo", "organico", "editorial"],
@@ -443,7 +450,8 @@ OBJETIVOS = {
         "keywords": [
             "coche", "coches", "auto", "autos", "automocion", "motor", "electrico", "ev", "moto", "motos",
             "motocicleta", "bici", "bicicleta", "movilidad", "nautica", "barco", "yate", "avion", "aero",
-            "hiperdeportivo", "supercar", "vehiculo"
+            "hiperdeportivo", "supercar", "vehiculo",
+            "neumaticos", "camion", "furgoneta", "patinete", "scooter", "karting", "concesionario", "taller mecanico"
         ],
         "comercial": {
             "estilos": ["liquid-glass", "producto", "lujo"],
@@ -471,7 +479,8 @@ OBJETIVOS = {
         "keywords": [
             "educacion", "curso", "cursos", "academia", "escuela", "universidad", "master", "bootcamp",
             "cultura", "museo", "fundacion", "libro", "libros", "editorial", "conferencia", "evento",
-            "investigacion", "ciencia", "historia", "divulgacion"
+            "investigacion", "ciencia", "historia", "divulgacion",
+            "colegio", "instituto", "guarderia", "oposiciones", "idiomas", "formacion", "elearning", "biblioteca", "teatro", "festival"
         ],
         "comercial": {
             "estilos": ["editorial", "suizo", "producto"],
@@ -493,12 +502,41 @@ OBJETIVOS = {
         }
     },
 
+    "gaming_servidores": {
+        "nombre": "Gaming, Servidores de Juegos & Comunidades",
+        "desc": "Servidores de Minecraft, Rust, Discord, dashboards de estado, clanes, telemetría de TPS/ping, mods, torneos",
+        "keywords": [
+            "minecraft", "servidor", "server", "servidores", "gaming", "game", "juego", "juegos", "gamer",
+            "amigos", "jugadores", "tps", "ping", "mods", "modpack", "plugin", "plugins", "rcon", "whitelist",
+            "survival", "bedrock", "java", "nether", "discord", "clan", "comunidad", "smp", "pvp"
+        ],
+        "comercial": {
+            "estilos": ["producto", "liquid-glass", "glassmorphism"],
+            "heros": ["foto-hero", "m3", "foto-split"],
+            "cards": ["bento", "dock", "fila"],
+            "navs": ["burbuja", "minimal", "anonima"]
+        },
+        "tecnico": {
+            "estilos": ["nothing", "industrial", "suizo"],
+            "heros": ["medidor", "masivo", "optica"],
+            "cards": ["specs", "tabla", "acordeon"],
+            "navs": ["chasis", "mono", "split"]
+        },
+        "vanguardia": {
+            "estilos": ["caelestia", "claymorphism", "neumorphism"],
+            "heros": ["vitrina", "burbuja", "split"],
+            "cards": ["split", "showcase", "dual"],
+            "navs": ["isla", "centrada", "burbuja"]
+        }
+    },
+
     "general_ecommerce": {
         "nombre": "E-Commerce & Retail Directo al Consumidor",
         "desc": "Tiendas online multimarca, retail directo D2C, productos de consumo, hogar, regalos, belleza general",
         "keywords": [
             "tienda", "tiendas", "ecommerce", "e-commerce", "comprar", "venta", "retail", "shop",
-            "carrito", "producto", "productos", "catalogo", "ofertas", "descuentos", "hogar", "regalo", "regalos"
+            "carrito", "producto", "productos", "catalogo", "ofertas", "descuentos", "hogar", "regalo", "regalos",
+            "supermercado", "floristeria", "juguetes", "mascotas", "papeleria", "ferreteria", "muebles", "decoracion", "libreria"
         ],
         "comercial": {
             "estilos": ["producto", "liquid-glass", "editorial"],
@@ -553,12 +591,16 @@ def detectar_objetivo(prompt):
                 score += 1
         puntuaciones[obj_id] = score
     
-    mejor_obj = max(puntuaciones, key=puntuaciones.get)
-    mejor_score = puntuaciones[mejor_obj]
-    
-    if mejor_score > 0:
-        return mejor_obj, mejor_score
-    return "general_ecommerce", 0
+    mejor_score = max(puntuaciones.values())
+    if mejor_score == 0:
+        return None, 0
+
+    # En caso de empate gana el sector especifico: los genericos solo ganan solos.
+    GENERICOS = ("general_ecommerce", "saas_b2b")
+    empatados = [o for o, sc in puntuaciones.items() if sc == mejor_score]
+    especificos = [o for o in empatados if o not in GENERICOS]
+    mejor_obj = especificos[0] if especificos else empatados[0]
+    return mejor_obj, mejor_score
 
 # ==============================================================================
 # 4. GESTIÓN DE HISTORIAL
@@ -716,8 +758,13 @@ def main():
         origen_obj = f"Fijado explícitamente ({OBJETIVOS[objetivo_usado]['nombre']})"
     elif prompt_completo:
         detectado, score = detectar_objetivo(prompt_completo)
-        objetivo_usado = detectado
-        origen_obj = f"Autodetectado ({OBJETIVOS[objetivo_usado]['nombre']} · score {score})"
+        if detectado is None:
+            objetivo_usado = "general_ecommerce"
+            origen_obj = ("Sin señal en el encargo · usando General E-Commerce "
+                          "(afina con --objetivo o --listar-objetivos)")
+        else:
+            objetivo_usado = detectado
+            origen_obj = f"Autodetectado ({OBJETIVOS[objetivo_usado]['nombre']} · score {score})"
     else:
         objetivo_usado = "general_ecommerce"
         origen_obj = "Por defecto (General E-Commerce)"
