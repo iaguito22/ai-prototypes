@@ -107,6 +107,38 @@ Un archivo por prototipo: `p1.html`, `p2.html`, `p3.html`, `p4.html`, `p5.html`,
 
 - **Scroll libre garantizado**: los `<iframe>` deben llevar `pointer-events: none;` en el CSS del comparador para no capturar los eventos de rueda del ratón y permitir que el usuario scrollee fluidamente por toda la página.
 - **En la cabecera de cada tarjeta (`.col-header`), incluye un botón redondo con el emoji `🌙` para conmutar el tema del iframe respectivo**.
+- **Escalado con `zoom` y viewport fijo, nunca con `transform: scale()` y porcentajes.** Si el iframe mide `width: 170%` y se encoge con `transform`, el viewport interno de cada prototipo depende del tamaño de la ventana (se queda en 700 px y el prototipo se ve en su versión móvil dentro de la miniatura). Cada prototipo debe maquetarse **siempre a 1280 px**, pase lo que pase con la ventana:
+
+```html
+<style>
+  .iframe-container { width: 100%; overflow: hidden; position: relative; background: #fff; }
+  .iframe-container iframe {
+    display: block;
+    width: 1280px;          /* viewport real del prototipo, fijo */
+    height: 1000px;
+    border: none;
+    zoom: var(--z, 1);      /* zoom re-maqueta; transform solo re-escala pixeles */
+    pointer-events: none;
+  }
+</style>
+<script>
+  // El factor se recalcula en cada cambio de tamano: nada de 0.588 a pelo.
+  const VP_W = 1280, VP_H = 1000;
+  function ajustarEscala() {
+    document.querySelectorAll('.iframe-container').forEach(c => {
+      const z = c.clientWidth / VP_W;
+      c.style.setProperty('--z', z);
+      c.style.height = Math.round(VP_H * z) + 'px';
+    });
+  }
+  ajustarEscala();
+  addEventListener('load', ajustarEscala);
+  addEventListener('resize', ajustarEscala);
+  new ResizeObserver(ajustarEscala).observe(document.documentElement);
+</script>
+```
+
+- **Nada de `html { height: 100%; overflow-y: scroll !important; }`** en el comparador: no arregla el scroll y estorba.
 
 Debajo de cada iframe, incluye la ficha con nombres de una palabra para facilitar el Mix & Match:
 - **Estilo:** `lujo`, `industrial`, `glassmorphism`, etc.
