@@ -45,17 +45,17 @@ FAMILIAS = [
         "ref": "https://apple.com",
         "paleta_osc": "#000000 negro plano · #ffffff texto · #2997ff azul Apple",
         "paleta_cla": "#f5f5f7 gris Apple · #1d1d1f texto · #0071e3 azul Apple",
-        "tipografia": "SF Pro / Inter",
+        "tipografia": "Geist (sustituto web de SF Pro)",
         "material": "Óptica neutra transparente con bisel superior iluminado",
     },
     {
-        "id": "neumorphism",
-        "nombre": "Neumorphism Táctil Soft UI",
-        "ref": "https://dribbble.com/tags/neumorphism",
-        "paleta_osc": "#1e2127 arcilla grafito · #4f70ff acento índigo",
-        "paleta_cla": "#e0e5ec gris cemento suave · #3d5af1 acento índigo",
-        "tipografia": "Be Vietnam Pro / Plus Jakarta Sans",
-        "material": "Relieves extruidos y cavidades continuas con sombras gemelas",
+        "id": "suave",
+        "nombre": "Suave SaaS (SphereAI, Dribbble)",
+        "ref": "https://dribbble.com/shots/26503722-SphereAI-AI-Landing-Page",
+        "paleta_osc": "#0b1020 noche azul · rgba(255,255,255,0.08) vidrio · #5b8cff acento",
+        "paleta_cla": "#eef5fd hielo · #ffffff tarjeta · #1f3fbf tinta azul · #0b0b0f boton negro",
+        "tipografia": "General Sans o Satoshi (Fontshare) en peso 300-400, grande y fino",
+        "material": "Radios 24-32px, hero en tarjeta con margen y foto/render dentro, vidrio esmerilado, botones pildora con flecha en circulo, sombras amplias y muy tenues del mismo tono",
     },
     {
         "id": "glassmorphism",
@@ -63,7 +63,7 @@ FAMILIAS = [
         "ref": "https://ui.aceternity.com",
         "paleta_osc": "#0f1422 fondo plano noche · rgba(255,255,255,0.06) cristal · #818cf8 acento",
         "paleta_cla": "#e0e7ff fondo índigo plano · rgba(255,255,255,0.55) cristal · #4338ca acento",
-        "tipografia": "Space Grotesk / Montserrat",
+        "tipografia": "Space Grotesk / Geist",
         "material": "Cristal escarchado blur(24px) sobre fondo plano contrastado",
     },
     {
@@ -72,17 +72,17 @@ FAMILIAS = [
         "ref": "https://teenage.engineering",
         "paleta_osc": "#1a1a1a aluminio negro · #e6e4df texto · #ff5500 pulsador naranja",
         "paleta_cla": "#e6e4df aluminio anodizado · #1c1c1c serigrafía · #ff5500 pulsador naranja",
-        "tipografia": "Space Mono · DM Sans",
+        "tipografia": "Space Mono · IBM Plex Sans",
         "material": "Aluminio mate mecanizado, cotas técnicas y tornillería de 1px",
     },
     {
-        "id": "claymorphism",
-        "nombre": "Claymorphism 3D Inflado",
-        "ref": "https://dribbble.com/tags/claymorphism",
-        "paleta_osc": "#15161e base noche · #202330 arcilla · #a78bfa acento",
-        "paleta_cla": "#eef2f9 base nube · #ffffff masa · #6c5ce7 lila inflado",
-        "tipografia": "Outfit / Poppins",
-        "material": "Cojines inflados 3D con radio 28px y botones bombilla convexos",
+        "id": "fotografico",
+        "nombre": "Fotografico con widget (Woodland, Bloom)",
+        "ref": "https://dribbble.com/tags/landing-page",
+        "paleta_osc": "sacada de la foto: sombra profunda · texto blanco · acento del objeto",
+        "paleta_cla": "sacada de la foto: tono claro dominante · tinta oscura · acento del objeto",
+        "tipografia": "Urbanist o Manrope ligera en titulares, a dos tonos",
+        "material": "Una foto enorme manda; encima, widget de vidrio con datos reales (precio, horario, reserva) y radios 20-28px",
     },
     {
         "id": "producto",
@@ -90,7 +90,7 @@ FAMILIAS = [
         "ref": "https://linear.app",
         "paleta_osc": "#000000 negro plano · #141414 tarjeta · #5e6ad2 acento",
         "paleta_cla": "#ffffff blanco plano · #f7f7f8 tarjeta · #5e6ad2 acento",
-        "tipografia": "Plus Jakarta Sans / Geist",
+        "tipografia": "Geist / Geist Mono",
         "material": "Superficies sólidas mate sin transparencias, bordes milimétricos al 8%",
     },
     {
@@ -108,7 +108,7 @@ FAMILIAS = [
         "ref": "https://readsomethingwonderful.com",
         "paleta_osc": "#1a1918 papel oscuro · #f4f4f2 texto · #c2452d rojo óxido",
         "paleta_cla": "#f4f4f2 base papel marfil · #111111 tinta · #c2452d rojo óxido",
-        "tipografia": "Newsreader (serif editorial) + Space Grotesk",
+        "tipografia": "Instrument Serif + Space Grotesk",
         "material": "Filetes tipográficos de 1px, pies de figura numerados (FIG. 01)",
     },
     {
@@ -117,7 +117,7 @@ FAMILIAS = [
         "ref": "https://www.phillips.com",
         "paleta_osc": "#0a0a0a fondo obsidiana · #f0ede6 texto · #8c7853 latón dorado",
         "paleta_cla": "#faf9f6 fondo marfil · #101010 texto · #8c7853 latón dorado",
-        "tipografia": "Bodoni Moda (didona alto contraste) + Montserrat fina",
+        "tipografia": "Bodoni Moda (didona alto contraste) + Hanken Grotesk",
         "material": "Filetes de latón dorado de 1px, numeración romana y amplios márgenes",
     },
     {
@@ -166,6 +166,9 @@ HEROS = [
     {"id": "vitrina", "nombre": "Vitrina Pedestal", "desc": "Composición vertical centrada con el objeto sobre pedestal e insignia flotante"},
     {"id": "editorial", "nombre": "Revista Doble Columna", "desc": "Titular con filete vertical y dos columnas de texto tipo publicación de diseño"},
     {"id": "masivo", "nombre": "Tipografía Monumental", "desc": "Titular tipográfico a escala gigante que ocupa el ancho completo"},
+    {"id": "inset", "nombre": "Tarjeta con Margen", "desc": "El hero es una tarjeta de radio 28px separada 16-20px del borde, con la foto o el render a sangre dentro y el titular encima"},
+    {"id": "incrustada", "nombre": "Imagen en el Titular", "desc": "Titular grande con una imagen pequeña en pildora metida entre dos palabras"},
+    {"id": "widget", "nombre": "Foto con Widget", "desc": "Foto enorme y encima un widget de vidrio con datos reales del encargo (precio, horario, reserva)"},
     {"id": "manifiesto", "nombre": "Manifiesto de Autor", "desc": "Cita textual del luthier/artesano en tipografía cursiva destacada con firma"},
     {"id": "burbuja", "nombre": "Cojín Inflado 3D", "desc": "Volumen táctil suave con cápsula de relieve y badge convexo"},
     {"id": "optica", "nombre": "Óptica Translúcida", "desc": "Panel de cristal con bisel iluminado y diagrama de ondas de fase"},
@@ -195,7 +198,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["liquid-glass", "producto", "glassmorphism"],
-            "heros": ["foto-split", "foto-hero", "m3"],
+            "heros": ["inset", "widget", "foto-split", "foto-hero", "m3"],
             "cards": ["bento", "dock", "dual"],
             "navs": ["anonima", "minimal", "burbuja", "split"]
         },
@@ -206,8 +209,8 @@ OBJETIVOS = {
             "navs": ["chasis", "mono", "split"]
         },
         "vanguardia": {
-            "estilos": ["caelestia", "claymorphism", "neumorphism"],
-            "heros": ["vitrina", "burbuja", "split"],
+            "estilos": ["caelestia", "fotografico", "suave"],
+            "heros": ["incrustada", "vitrina", "burbuja", "split"],
             "cards": ["split", "showcase", "acordeon"],
             "navs": ["isla", "centrada", "burbuja"]
         }
@@ -224,7 +227,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["lujo", "organico", "editorial"],
-            "heros": ["manifiesto", "foto-hero", "centrado"],
+            "heros": ["inset", "widget", "manifiesto", "foto-hero", "centrado"],
             "cards": ["showcase", "bento", "split"],
             "navs": ["subastas", "apilada", "centrada"]
         },
@@ -236,7 +239,7 @@ OBJETIVOS = {
         },
         "vanguardia": {
             "estilos": ["liquid-glass", "caelestia", "organico"],
-            "heros": ["vitrina", "optica", "centrado"],
+            "heros": ["incrustada", "vitrina", "optica", "centrado"],
             "cards": ["bento", "showcase", "dual"],
             "navs": ["isla", "anonima", "subastas"]
         }
@@ -252,7 +255,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["producto", "liquid-glass", "glassmorphism"],
-            "heros": ["m3", "editorial", "split"],
+            "heros": ["inset", "widget", "m3", "editorial", "split"],
             "cards": ["dock", "bento", "dual"],
             "navs": ["minimal", "split", "anonima"]
         },
@@ -263,8 +266,8 @@ OBJETIVOS = {
             "navs": ["mono", "chasis", "split"]
         },
         "vanguardia": {
-            "estilos": ["caelestia", "claymorphism", "neumorphism"],
-            "heros": ["burbuja", "vitrina", "foto-split"],
+            "estilos": ["caelestia", "fotografico", "suave"],
+            "heros": ["incrustada", "burbuja", "vitrina", "foto-split"],
             "cards": ["split", "acordeon", "documental"],
             "navs": ["isla", "burbuja", "centrada"]
         }
@@ -281,7 +284,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["organico", "editorial", "lujo"],
-            "heros": ["foto-hero", "centrado", "manifiesto"],
+            "heros": ["inset", "widget", "foto-hero", "centrado", "manifiesto"],
             "cards": ["fila", "bento", "showcase"],
             "navs": ["centrada", "subastas", "split"]
         },
@@ -292,8 +295,8 @@ OBJETIVOS = {
             "navs": ["apilada", "split", "minimal"]
         },
         "vanguardia": {
-            "estilos": ["claymorphism", "caelestia", "liquid-glass"],
-            "heros": ["burbuja", "vitrina", "optica"],
+            "estilos": ["fotografico", "caelestia", "liquid-glass"],
+            "heros": ["incrustada", "burbuja", "vitrina", "optica"],
             "cards": ["dock", "acordeon", "split"],
             "navs": ["burbuja", "isla", "anonima"]
         }
@@ -310,7 +313,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["editorial", "suizo", "organico"],
-            "heros": ["foto-hero", "editorial", "centrado"],
+            "heros": ["inset", "widget", "foto-hero", "editorial", "centrado"],
             "cards": ["documental", "showcase", "bento"],
             "navs": ["split", "centrada", "minimal"]
         },
@@ -322,7 +325,7 @@ OBJETIVOS = {
         },
         "vanguardia": {
             "estilos": ["caelestia", "liquid-glass", "lujo"],
-            "heros": ["manifiesto", "vitrina", "optica"],
+            "heros": ["incrustada", "manifiesto", "vitrina", "optica"],
             "cards": ["split", "dock", "dual"],
             "navs": ["isla", "anonima", "apilada"]
         }
@@ -339,7 +342,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["liquid-glass", "producto", "organico"],
-            "heros": ["foto-split", "centrado", "foto-hero"],
+            "heros": ["inset", "widget", "foto-split", "centrado", "foto-hero"],
             "cards": ["bento", "dual", "dock"],
             "navs": ["minimal", "anonima", "split"]
         },
@@ -350,8 +353,8 @@ OBJETIVOS = {
             "navs": ["mono", "split", "chasis"]
         },
         "vanguardia": {
-            "estilos": ["caelestia", "glassmorphism", "claymorphism"],
-            "heros": ["vitrina", "burbuja", "m3"],
+            "estilos": ["caelestia", "glassmorphism", "fotografico"],
+            "heros": ["incrustada", "vitrina", "burbuja", "m3"],
             "cards": ["showcase", "split", "fila"],
             "navs": ["isla", "burbuja", "centrada"]
         }
@@ -368,7 +371,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["producto", "liquid-glass", "glassmorphism"],
-            "heros": ["m3", "editorial", "split"],
+            "heros": ["inset", "widget", "m3", "editorial", "split"],
             "cards": ["dock", "bento", "dual"],
             "navs": ["minimal", "split", "anonima"]
         },
@@ -379,8 +382,8 @@ OBJETIVOS = {
             "navs": ["mono", "chasis", "split"]
         },
         "vanguardia": {
-            "estilos": ["caelestia", "lujo", "neumorphism"],
-            "heros": ["vitrina", "manifiesto", "foto-split"],
+            "estilos": ["caelestia", "lujo", "suave"],
+            "heros": ["incrustada", "vitrina", "manifiesto", "foto-split"],
             "cards": ["split", "documental", "showcase"],
             "navs": ["isla", "subastas", "centrada"]
         }
@@ -397,7 +400,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["editorial", "suizo", "producto"],
-            "heros": ["foto-hero", "foto-split", "masivo"],
+            "heros": ["inset", "widget", "foto-hero", "foto-split", "masivo"],
             "cards": ["bento", "fila", "showcase"],
             "navs": ["split", "minimal", "centrada"]
         },
@@ -408,8 +411,8 @@ OBJETIVOS = {
             "navs": ["chasis", "mono", "split"]
         },
         "vanguardia": {
-            "estilos": ["claymorphism", "lujo", "caelestia"],
-            "heros": ["manifiesto", "burbuja", "vitrina"],
+            "estilos": ["fotografico", "lujo", "caelestia"],
+            "heros": ["incrustada", "manifiesto", "burbuja", "vitrina"],
             "cards": ["dock", "split", "dual"],
             "navs": ["burbuja", "subastas", "isla"]
         }
@@ -426,7 +429,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["lujo", "organico", "editorial"],
-            "heros": ["foto-hero", "manifiesto", "centrado"],
+            "heros": ["inset", "widget", "foto-hero", "manifiesto", "centrado"],
             "cards": ["showcase", "bento", "split"],
             "navs": ["subastas", "apilada", "centrada"]
         },
@@ -438,7 +441,7 @@ OBJETIVOS = {
         },
         "vanguardia": {
             "estilos": ["caelestia", "liquid-glass", "organico"],
-            "heros": ["vitrina", "optica", "burbuja"],
+            "heros": ["incrustada", "vitrina", "optica", "burbuja"],
             "cards": ["dock", "dual", "acordeon"],
             "navs": ["isla", "anonima", "burbuja"]
         }
@@ -455,7 +458,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["liquid-glass", "producto", "lujo"],
-            "heros": ["foto-hero", "foto-split", "m3"],
+            "heros": ["inset", "widget", "foto-hero", "foto-split", "m3"],
             "cards": ["bento", "showcase", "dual"],
             "navs": ["split", "minimal", "subastas"]
         },
@@ -466,8 +469,8 @@ OBJETIVOS = {
             "navs": ["chasis", "mono", "split"]
         },
         "vanguardia": {
-            "estilos": ["caelestia", "glassmorphism", "claymorphism"],
-            "heros": ["vitrina", "burbuja", "split"],
+            "estilos": ["caelestia", "glassmorphism", "fotografico"],
+            "heros": ["incrustada", "vitrina", "burbuja", "split"],
             "cards": ["dock", "split", "documental"],
             "navs": ["isla", "anonima", "burbuja"]
         }
@@ -484,7 +487,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["editorial", "suizo", "producto"],
-            "heros": ["editorial", "centrado", "foto-split"],
+            "heros": ["inset", "widget", "editorial", "centrado", "foto-split"],
             "cards": ["bento", "documental", "fila"],
             "navs": ["split", "centrada", "minimal"]
         },
@@ -496,7 +499,7 @@ OBJETIVOS = {
         },
         "vanguardia": {
             "estilos": ["caelestia", "organico", "lujo"],
-            "heros": ["manifiesto", "vitrina", "burbuja"],
+            "heros": ["incrustada", "manifiesto", "vitrina", "burbuja"],
             "cards": ["dock", "split", "showcase"],
             "navs": ["isla", "subastas", "anonima"]
         }
@@ -512,7 +515,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["producto", "liquid-glass", "glassmorphism"],
-            "heros": ["foto-hero", "m3", "foto-split"],
+            "heros": ["inset", "widget", "foto-hero", "m3", "foto-split"],
             "cards": ["bento", "dock", "fila"],
             "navs": ["burbuja", "minimal", "anonima"]
         },
@@ -523,8 +526,8 @@ OBJETIVOS = {
             "navs": ["chasis", "mono", "split"]
         },
         "vanguardia": {
-            "estilos": ["caelestia", "claymorphism", "neumorphism"],
-            "heros": ["vitrina", "burbuja", "split"],
+            "estilos": ["caelestia", "fotografico", "suave"],
+            "heros": ["incrustada", "vitrina", "burbuja", "split"],
             "cards": ["split", "showcase", "dual"],
             "navs": ["isla", "centrada", "burbuja"]
         }
@@ -540,7 +543,7 @@ OBJETIVOS = {
         ],
         "comercial": {
             "estilos": ["producto", "liquid-glass", "editorial"],
-            "heros": ["foto-hero", "foto-split", "centrado"],
+            "heros": ["inset", "widget", "foto-hero", "foto-split", "centrado"],
             "cards": ["bento", "fila", "dock"],
             "navs": ["split", "minimal", "anonima"]
         },
@@ -551,8 +554,8 @@ OBJETIVOS = {
             "navs": ["mono", "chasis", "split"]
         },
         "vanguardia": {
-            "estilos": ["organico", "claymorphism", "caelestia"],
-            "heros": ["burbuja", "vitrina", "manifiesto"],
+            "estilos": ["organico", "fotografico", "caelestia"],
+            "heros": ["incrustada", "burbuja", "vitrina", "manifiesto"],
             "cards": ["showcase", "split", "acordeon"],
             "navs": ["burbuja", "isla", "subastas"]
         }
@@ -715,6 +718,11 @@ def seleccionar_seis_direcciones(objetivo_id, evitar=None, solo=None, usar_histo
             "hero": h
         })
     
+    # Una de las seis siempre es `suave`: es la estetica que le gusta al usuario, y asi
+    # la tiene para comparar aunque el sector no la pida.
+    if not any(r["estilo"]["id"] == "suave" for r in resultado) and "suave" not in evitar:
+        resultado[1]["estilo"] = FAMILIAS_MAP["suave"]
+        estilos_usados[1] = "suave"
     guardar_historial(estilos_usados)
     return resultado
 

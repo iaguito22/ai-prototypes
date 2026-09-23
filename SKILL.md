@@ -11,23 +11,189 @@ description: >-
 
 El fallo de siempre: te piden varias opciones y salen versiones de la misma cosa
 (una clara y minimalista, una oscura de lujo, una de papel). Es la mediana del
-entrenamiento. Aquí **la dirección no la eliges tú**.
+entrenamiento. Aqui **la direccion no la eliges tu**.
 
 ## Paso 1. Tira el dado. Obligatorio.
 
-Debes ejecutar el script de Python `dado.py` que se encuentra en la carpeta de esta skill para obtener las semillas creativas:
-
-```sh
-# Busca y ejecuta el dado
-SCRIPT_PATH=$(find ~/.gemini/config/skills/ -name "dado.py" -type f | head -n 1)
-python3 "$SCRIPT_PATH" "<prompt o palabras clave del encargo>"
 ```
+python3 ~/.gemini/config/skills/prototypes/dado.py "<prompt del encargo>"   # Antigravity CLI
+python3 ~/.claude/skills/prototypes/dado.py "<prompt del encargo>"          # Claude Code
+python  %USERPROFILE%\.gemini\config\skills\prototypes\dado.py "<prompt del encargo>"   # Windows
+```
+No lo leas antes: ejecútalo. Y no uses `find` para buscarlo, que hay otro `dado.py`
+en `web-frontend`.
+
+`dado.py` vive junto a este `SKILL.md`: si la skill esta en otra ruta, la del
+dado es esa misma. No lo tires "de memoria": sin ejecutarlo no hay tirada.
 
 Te devuelve **seis direcciones completas** estructuradas en **3 franjas ortogonales**:
 1. **Comercial / Alta Conversión (2 prototipos)**: estándares de alta conversión y claridad directa para el sector.
 2. **Técnico / Rigor Funcional (2 prototipos)**: enfoque en datos, tablas, telemetría y especificaciones de ingeniería.
 3. **Vanguardia / Emoción Visual (2 prototipos)**: exploraciones audaces de impacto visual y diferenciación estética.
 
-- **Autodetección inteligente**: pasa la descripción del encargo entre comillas y el dado clasificará automáticamente entre los 12 arquetipos de negocio.
-- `--objetivo <id>` para forzar un arquetipo específico.
+- **Autodetección inteligente**: pasa la descripción del encargo entre comillas y el dado clasificará automáticamente entre los 12 arquetipos de negocio (`hardware_tech`, `lujo_artesania`, `saas_b2b`, `gastro_restauracion`, `portfolio_creativo`, `salud_wellness`, `fintech_crypto`, `moda_streetwear`, `inmobiliaria_espacios`, `automocion_movilidad`, `educacion_cultura`, `general_ecommerce`).
+- `--objetivo <id>` para forzar un arquetipo específico (ej. `--objetivo hardware_tech`).
+- `--listar-objetivos` para ver todos los sectores soportados.
 - `--aleatorio` para desactivar la ponderación sectorial y usar azar uniforme puro.
+- El dado **recuerda las últimas direcciones y no las repite**. `--repetir` desactiva esa memoria.
+- `--semilla <texto>` si quieres reproducir una tirada exacta.
+- `--evitar <familia>` si el usuario ya ha descartado un mundo entero.
+- `--solo <familia>` para forzar una familia en la primera posición.
+
+## Glosario de Nombres de Una Sola Palabra (Mix & Match)
+
+Usa siempre estos identificadores directos en la ficha y en la entrega:
+
+### Familias Estéticas (`Estilo`)
+- `caelestia`, `nothing`, `liquid-glass`, `suave`, `glassmorphism`, `industrial`, `fotografico`, `producto`, `suizo`, `editorial`, `lujo`, `organico`.
+- **Una de las seis es siempre `suave`**: es el estilo que le gusta al usuario (radios
+  grandes, vidrio, un solo tono, minimalista sin quedarse vacío). Hazla con mimo.
+
+### Los 10 Arquetipos de Tarjeta (`Card`)
+- `bento` — tarjeta vertical limpia con chip de categoría/ración arriba y botón directo.
+- `fila` — fila horizontal continua con render a la izquierda y selector `[- 1 +]` a la derecha.
+- `dual` — tarjeta con pestañas internas `[Estándar | Trufa]` para conmutar variantes en vivo.
+- `specs` — ficha de hardware con tabla mono de datos/cotas técnicas y pulsador mecánico `[PUSH]`.
+- `split` — división 50/50 con render enmarcado a la izquierda y bloque de texto y botón a la derecha.
+- `showcase` — vitrina centrada en el objeto con badge flotante arriba y botón ancho completo.
+- `tabla` — fila ultradensa de inventario con miniatura reducida, código SKU y chip de stock.
+- `dock` — cápsula redondeada flotante tipo píldora de interacción rápida.
+- `acordeon` — tarjeta compacta con desplegable de detalles técnicos/alérgenos al pulsar.
+- `documental` — estructura editorial con numeración `FIG. 01`, marco técnico y pie documental.
+
+### Los 10 Arquetipos de Navegación (`Nav`)
+- `centrada` — enlaces 100% centrados en la página sin nombre de marca.
+- `anonima` — cápsula píldora suspendida con selectores de categoría/filtro, sin logotipo ni texto de marca.
+- `split` — logotipo a la izquierda y enlaces/CTA a la derecha en los extremos del contenedor.
+- `mono` — cabecera técnica en monospace continuo con marca, versión y enlaces en línea.
+- `isla` — píldora flotante compacta de vidrio suspendida con logo minimalista y enlaces.
+- `apilada` — logotipo centrado en la fila superior y barra de enlaces centrada en la fila inferior.
+- `chasis` — panel de ingeniería con tornillería en esquinas y selector de canal `[01] [02]`.
+- `minimal` — solo logotipo tipográfico a la izquierda y un botón de acción directo a la derecha.
+- `subastas` — logotipo monumental al centro dividido por dos enlaces a cada lado entre filetes de 1px.
+- `burbuja` — cápsula inflada redondeada con volumen suave 3D y dot de estado activo.
+
+### Los Arquetipos de Cabecera Hero (`Hero`)
+- `foto-split` — pantalla dividida con fotografía real de alta resolución enmarcada a un lado y texto con CTA al otro.
+- `foto-hero` — fotografía inmersiva de producto/taller a sangre con tratamiento de luz y titular tipográfico integrado.
+- `centrado` — titular masivo y lead 100% centrados en columna única limpia sin cajas laterales.
+- `split` — pantalla dividida 50/50 con render técnico a la izquierda y texto a la derecha.
+- `medidor` — consola técnica con barras de nivel, osciloscopio o cotas acústicas.
+- `vitrina` — composición vertical centrada con el objeto sobre pedestal e insignia flotante.
+- `editorial` — titular con filete vertical y dos columnas de texto tipo publicación de diseño.
+- `masivo` — titular tipográfico monumental a escala gigante que ocupa el ancho completo.
+- `manifiesto` — bloque editorial de declaración con cita textual del artesano en cursiva y firma.
+- `burbuja` — volumen táctil suave con cápsula de relieve y badge convexo 3D.
+- `optica` — panel translúcido con bisel iluminado y diagrama de ondas de fase.
+- `m3` — composición tonal asimétrica por niveles tonales superpuestos.
+- `inset` — el hero es una tarjeta de radio 28px separada del borde, con la foto a sangre dentro.
+- `incrustada` — titular grande con una imagen pequeña en píldora entre dos palabras. La píldora lleva
+  una de las imágenes generadas (`object-fit: cover`), nunca vacía ni un degradado.
+- `widget` — foto enorme con un widget de vidrio encima que lleva datos reales del encargo.
+
+## Paso 2. Fija lo que NO cambia y adapta el modelo de datos
+
+**Los seis prototipos llevan exactamente el mismo contenido y la misma estructura limpia simétrica, adaptada a la naturaleza del encargo.**
+- **No inventes catálogos de compra ni precios si no es una tienda**: si el encargo es un servidor de juegos, el contenido son instancias, amigos conectados, telemetría TPS y mods; si es un portfolio, son proyectos; si es un restaurante, la carta; si es un SaaS, módulos funcionales.
+- **Card única o cuadrícula según el número de elementos**: si el encargo trata de un solo elemento central (ej. un único servidor, una herramienta única o un producto insignia), la sección de contenido puede estructurarse con **una sola Card monumental a ancho completo** con el arquetipo asignado, en lugar de inventar 3 tarjetas forzadas.
+- Cero secciones forzadas o postizas que no aporten al objetivo real del usuario.
+
+## Paso 3. Construye los seis en Modo Claro por defecto
+
+Un archivo por prototipo: `p1.html`, `p2.html`, `p3.html`, `p4.html`, `p5.html`, `p6.html`, cada uno autónomo como **landing desktop completa y real** (Nav, Hero estructurado, Sección de contenido estructurado con el arquetipo de Card asignado, y Footer).
+
+**Requisitos obligatorios**:
+- Todos arrancan en **Modo Claro por defecto**.
+- Deben incluir la función `toggleTheme()` en JavaScript que conmuta la clase `dark-mode` en el `body` (las páginas individuales no llevan botón visible de tema en su cabecera; el botón de conmutar va en el marco exterior del comparador).
+- **Cero patrones de relleno IA**: aplica la lista de prohibidos del §3 de la skill
+  [`web-frontend`](https://github.com/iaguito22/antigravity-skills) si la tienes (plantilla 2023 y 2026, fuentes por
+  defecto, datos "en vivo" inventados, frases hechas). Nada de tríadas de cifras ni de 3
+  tarjetas de beneficios.
+- **Imágenes**: lo que separa una landing de Dribbble de una hecha por IA es la imagen.
+  Genera como mucho 2 con `generate_image` para las seis (prompt de director de arte:
+  objeto, encuadre y luz concretos, "35mm film" o "soft 3D render, studio light"), cópialas
+  como `.jpg` junto a los html y reutilízalas. Los que no las usen tiran de tipografía y SVG.
+- **Artesanía**: una sola escala de radios, botones en píldora cuando el estilo es
+  redondeado, sombras amplias y muy tenues teñidas del tono (nunca grises al 30 %),
+  titulares con contraste de peso (fino y grande funciona mejor que grueso).
+- Escala tipográfica real (3-4 tamaños distintivos) e interlineado 1.5.
+- Gráficos vectoriales SVG propios y proporcionados al contenedor.
+- Nada de formularios, calculadoras ni datos en vivo que no se pidieron; cada `p*.html`
+  por debajo de 30 KB.
+- Precios o datos numéricos con `font-variant-numeric: tabular-nums`.
+
+## Paso 4. Página para comparar reactiva y fluida con scroll libre
+
+`comparar.html` organiza los seis en `<iframe>` mediante un layout **reactivo fluido con mayor ancho por tarjeta** (`repeat(3, minmax(0, 1fr))` para **3x2 en pantalla completa >1350px**, `@media (max-width: 1350px)` con `repeat(2, minmax(0, 1fr))` para **2x3 a mitad de pantalla**, y 1 columna en móvil), con **fondo cálido** (`#f5f2eb` / `#fbf9f4`) y escala de viewport desktop.
+
+- **Scroll libre garantizado**: los `<iframe>` deben llevar `pointer-events: none;` en el CSS del comparador para no capturar los eventos de rueda del ratón y permitir que el usuario scrollee fluidamente por toda la página.
+- **En la cabecera de cada tarjeta (`.col-header`), incluye un botón redondo con el emoji `🌙` para conmutar el tema del iframe respectivo**.
+- **Escalado con `zoom` y viewport fijo, nunca con `transform: scale()` y porcentajes.** Si el iframe mide `width: 170%` y se encoge con `transform`, el viewport interno de cada prototipo depende del tamaño de la ventana (se queda en 700 px y el prototipo se ve en su versión móvil dentro de la miniatura). Cada prototipo debe maquetarse **siempre a 1280 px**, pase lo que pase con la ventana:
+
+```html
+<style>
+  .iframe-container { width: 100%; overflow: hidden; position: relative; background: #fff; }
+  .iframe-container iframe {
+    display: block;
+    width: 1280px;          /* viewport real del prototipo, fijo */
+    height: 1000px;
+    border: none;
+    zoom: var(--z, 1);      /* zoom re-maqueta; transform solo re-escala pixeles */
+    pointer-events: none;
+  }
+</style>
+<script>
+  // El factor se recalcula en cada cambio de tamano: nada de 0.588 a pelo.
+  const VP_W = 1280, VP_H = 1000;
+  function ajustarEscala() {
+    document.querySelectorAll('.iframe-container').forEach(c => {
+      const z = c.clientWidth / VP_W;
+      c.style.setProperty('--z', z);
+      c.style.height = Math.round(VP_H * z) + 'px';
+    });
+  }
+  ajustarEscala();
+  addEventListener('load', ajustarEscala);
+  addEventListener('resize', ajustarEscala);
+  new ResizeObserver(ajustarEscala).observe(document.documentElement);
+</script>
+```
+
+- **Nada de `html { height: 100%; overflow-y: scroll !important; }`** en el comparador: no arregla el scroll y estorba.
+
+Debajo de cada iframe, incluye la ficha con nombres de una palabra para facilitar el Mix & Match:
+- **Estilo:** `lujo`, `industrial`, `glassmorphism`, etc.
+- **Nav:** `mono`, `flotante`, `chasis`, `burbuja`, etc.
+- **Hero:** `editorial`, `split`, `medidor`, `vitrina`, etc.
+- **Card:** `split`, `specs`, `fila`, `dual`, `bento`, `tabla`, `dock`, etc.
+- **Paleta:** color base · color acento (`#hex` · `#hex`).
+
+```html
+<div class="ingredientes">
+  <div class="ing-row"><span class="ing-key">Estilo:</span><span class="ing-val">producto</span></div>
+  <div class="ing-row"><span class="ing-key">Nav:</span><span class="ing-val">flotante</span></div>
+  <div class="ing-row"><span class="ing-key">Hero:</span><span class="ing-val">split</span></div>
+  <div class="ing-row"><span class="ing-key">Card:</span><span class="ing-val">bento</span></div>
+  <div class="ing-row"><span class="ing-key">Paleta:</span><span class="ing-val"><code>#ffffff</code> · <code>#5e6ad2</code></span></div>
+</div>
+```
+
+## Paso 5. Miralos antes de enseñarlos
+
+Abre `comparar.html` y **mira la captura antes de entregar**. Con `agy-ver`
+instalado:
+
+```
+for f in p?.html; do echo "== $f"; python3 ~/.gemini/config/skills/web-frontend/revisa.py $f; done && agy-ver abrir comparar.html && agy-ver foto los-seis && agy-ver logs && agy-ver cerrar
+```
+Todo en UNA llamada (el bucle del revisor solo si tienes [`web-frontend`](https://github.com/iaguito22/antigravity-skills)). Cada línea del revisor se corrige con una edición puntual.
+
+Sin el, vale cualquier via que te deje **ver** la pagina: la herramienta de
+navegador de tu CLI, o pedirle al usuario que la abra y te diga que ve. Lo que
+no vale es entregar seis prototipos que nadie ha mirado.
+
+Abre la captura y comprueba: (1) que todos se ven en Modo Claro, (2) que **no se parecen**, (3) que el botón redondo conmuta a oscuro correctamente, (4) que la ficha usa nombres de una palabra fáciles de combinar.
+
+## Paso 6. Entrega
+
+Una línea por prototipo con sus nombres simples, y una recomendación con motivo.

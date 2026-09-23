@@ -6,9 +6,10 @@ El problema que resuelve: si le pides a un modelo "tres opciones de diseño", te
 devuelve tres veces la mediana de su entrenamiento (una clara y minimalista, una
 oscura de lujo, una de papel). Aquí la dirección estética **no la elige el modelo**:
 la tira un dado, `dado.py`, con un catálogo de 12 familias (caelestia, nothing,
-liquid-glass, neumorphism, glassmorphism, industrial, claymorphism, producto, suizo,
-editorial, lujo, orgánico) cruzadas con 10 arquetipos de tarjeta, 10 de navegación y 12
-de cabecera. Cada prototipo sale con familia, `Nav`, `Hero` y `Card` distintos, así que la
+liquid-glass, suave, glassmorphism, industrial, fotográfico, producto, suizo,
+editorial, lujo, orgánico) cruzadas con 10 arquetipos de tarjeta, 10 de navegación y 15
+de cabecera. Una de las seis es siempre `suave` (radios grandes, vidrio, un solo tono);
+`--evitar suave` la quita. Cada prototipo sale con familia, `Nav`, `Hero` y `Card` distintos, así que la
 diferencia no está solo en el color.
 
 El dado tampoco tira a ciegas: le pasas el encargo entre comillas, clasifica el sector
