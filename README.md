@@ -2,33 +2,31 @@
 
 Seis prototipos visuales de una misma página que **de verdad no se parecen entre sí**.
 
-El problema que resuelve: si le pides a un modelo "tres opciones de diseño", te
-devuelve tres veces la mediana de su entrenamiento (una clara y minimalista, una
-oscura de lujo, una de papel). Aquí la dirección estética **no la elige el modelo**:
-la tira un dado, `dado.py`, con un catálogo de 12 familias (caelestia, nothing,
-liquid-glass, suave, glassmorphism, industrial, fotográfico, producto, suizo,
-editorial, lujo, orgánico) cruzadas con 10 arquetipos de tarjeta, 10 de navegación y 15
-de cabecera. Una de las seis es siempre `suave` (radios grandes, vidrio, un solo tono);
-`--evitar suave` la quita. Cada prototipo sale con familia, `Nav`, `Hero` y `Card` distintos, así que la
-diferencia no está solo en el color.
+El problema que resuelve: si le pides a un modelo "varias opciones de diseño", te devuelve
+seis pieles del mismo esqueleto (mismo titular, mismas secciones, solo cambian color y
+fuente) o cae en los delatores de IA: hero mitad texto / mitad foto, la palabra clave del
+titular en otro color, una fila de cifras, brillos de colores.
 
-El dado tampoco tira a ciegas: le pasas el encargo entre comillas, clasifica el sector
-entre 12 arquetipos de negocio (hardware, lujo, SaaS, gastronomía, salud, fintech, moda,
-inmobiliaria, automoción, educación, portfolio, e-commerce) y reparte las seis direcciones
-en **tres franjas** — dos comerciales, dos técnicas y dos de vanguardia. Así ninguna de las
-seis es una apuesta perdida, pero dos siguen siendo arriesgadas.
+Aquí la dirección no la elige el modelo: la tira un dado, `dado.py`, sacado de shots reales
+de Dribbble (Kumo, Golfair, Nuvé, Liquid Brokers, MarkOne, Fineo…). Cada prototipo recibe:
 
-El dado guarda memoria de las últimas tiradas y evita repetirlas mientras el sector le deje
-margen. La skill obliga después a montar una página que compare los seis a la vez y a
-mirarla antes de entregar.
+- un **estilo** de 8 (suave, minimal, liquid-glass, nothing, lienzo, estudio, editorial,
+  suizo), siempre clean, una sola tinta;
+- un **hero** de 7, ninguno partido: foto a sangre con widgets de vidrio, objeto enorme
+  centrado, objeto en órbita, retrato anotado con UI, palabra gigante recortada…; en cada
+  tirada uno lleva **foto a pantalla completa**;
+- un **concepto, estructura y voz** propios, para que sean seis ideas y no seis colores;
+- **su propia foto**: en estas referencias la imagen es la página y el concepto va encima.
 
-![Seis prototipos de la misma carta de sushi](docs/comparativa.png)
+Detecta si el encargo es una landing, una app móvil o un panel, guarda memoria de las
+últimas tiradas para no repetirlas, y la skill obliga a montar una página que compare los
+seis a la vez y a mirarla antes de entregar.
 
-*Seis prototipos para un buffet de sushi con pedido por mesa: `lujo` + `medidor` + `bento`,
-`producto` + `manifiesto` + `dock`, `industrial` + `editorial` + `showcase`, `suizo` +
-`foto-split` + `documental`, `nothing` + `m3` + `dual`, `caelestia` + `masivo` + `tabla`.
-Los mismos seis platos y la misma comanda de 33,30 € en las seis, y ninguna se parece a
-otra.*
+![Seis prototipos del mismo taller de cerámica](docs/comparativa.jpg)
+
+*Seis primeras pantallas para un taller de cerámica: liquid-glass con foto a sangre, suizo
+en retícula, lienzo con la pregunta encima de la foto, suave con barra de pasos, editorial
+con palabra gigante y minimal con el titular centrado. Mismos datos del negocio en las seis.*
 
 ## Instalar
 
@@ -57,14 +55,13 @@ arrancas un diseño sin dirección estética decidida.
 
 Banderas del dado (las usa el modelo, pero puedes lanzarlo a mano):
 
-    python3 dado.py "tienda de auriculares"   detecta el sector y pondera la tirada
+    python3 dado.py "taller de cerámica"      seis direcciones para ese encargo
                                               (en Windows: python dado.py "...")
-    python3 dado.py --listar-objetivos        lista los 12 arquetipos de negocio
-    python3 dado.py --objetivo saas_b2b       fuerza un sector en vez de detectarlo
-    python3 dado.py --aleatorio               azar puro, sin ponderar por sector
+    python3 dado.py --tipo movil "..."        fuerza landing, movil o panel
+    python3 dado.py --listar                  lista los estilos
+    python3 dado.py --evitar nothing,estudio  descarta estilos
+    python3 dado.py --solo suizo              fuerza uno en P1 y sortea el resto
     python3 dado.py --semilla <texto>         repite exactamente la misma tirada
-    python3 dado.py --evitar lujo             descarta una familia entera
-    python3 dado.py --solo suizo              fuerza una y sortea las otras cinco
     python3 dado.py --repetir                 ignora la memoria de tiradas recientes
 
 ## Ver el resultado
