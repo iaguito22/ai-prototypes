@@ -492,6 +492,24 @@ def main():
         if all(pos.count(p) <= MAX_POSICION[p] for p in set(pos)):
             break
     imprimir(fichas, tipo, encargo)
+    # Para comparar.py: el comparador se genera, no se escribe a mano.
+    try:
+        with open("fichas.json", "w", encoding="utf-8") as fh:
+            json.dump({"tipo": tipo, "encargo": encargo, "fichas": [
+                dict(f, nombre=ESTILOS[f["estilo"]]["nombre"], paleta=list(f["paleta"]))
+                for f in fichas]}, fh, ensure_ascii=False, indent=1)
+    except Exception:
+        pass
+    # Las recetas de los estilos que han salido, aquí mismo: leer un fichero es un paso más.
+    try:
+        rec = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "recetas.md"), encoding="utf-8").read()
+        partes = {b.split("\n", 1)[0].strip(): b.split("\n", 1)[1].strip() for b in rec.split("## ")[1:]}
+        print("RECETAS DE LOS ESTILOS QUE HAN SALIDO")
+        for e in dict.fromkeys(f["estilo"] for f in fichas):
+            if e in partes:
+                print("· %s: %s" % (e, " ".join(partes[e].split())))
+    except Exception:
+        pass
     if not a.semilla:
         guardar_historial({"estilos": [f["estilo"] for f in fichas],
                            "conceptos": [f["concepto"] for f in fichas],

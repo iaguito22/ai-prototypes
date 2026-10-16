@@ -19,8 +19,18 @@ de Dribbble (Kumo, Golfair, Nuvé, Liquid Brokers, MarkOne, Fineo…). Cada prot
 - **su propia foto**: en estas referencias la imagen es la página y el concepto va encima.
 
 Detecta si el encargo es una landing, una app móvil o un panel, guarda memoria de las
-últimas tiradas para no repetirlas, y la skill obliga a montar una página que compare los
-seis a la vez y a mirarla antes de entregar.
+últimas tiradas para no repetirlas e imprime, con cada ficha, la receta concreta de su
+estilo (`recetas.md`). Lo demás también lo hace un script y no el modelo:
+
+- `comparar.py` monta `comparar.html` con los seis a la vez, a escala real con `zoom`
+  (con `transform: scale()` cada iframe veía otro ancho), sin scroll interno y con botón
+  de tema para todos;
+- `revisa.py` repasa los seis y avisa de los delatores (palabra del titular en color,
+  coordenadas GPS, direcciones inventadas, fuentes por defecto…);
+- `foto.py` comprime las fotos generadas (~850 → ~150 KB).
+
+La skill obliga a mirar la comparativa antes de entregar. En `agy` las seis fotos se
+generan en una sola llamada con subagentes.
 
 ![Seis prototipos del mismo taller de cerámica](docs/comparativa.jpg)
 
@@ -43,7 +53,7 @@ con palabra gigante y minimal con el titular centrado. Mismos datos del negocio 
     git clone https://github.com/iaguito22/ai-prototypes $env:USERPROFILE\.gemini\config\skills\prototypes
     git clone https://github.com/iaguito22/ai-prototypes $env:USERPROFILE\.claude\skills\prototypes
 
-Necesita Python para el dado, y nada más. En Windows el intérprete se llama `python`
+Necesita Python, y Pillow solo para `foto.py`. En Windows el intérprete se llama `python`
 (o `py -3`), no `python3`.
 
 ## Usar
